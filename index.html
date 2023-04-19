@@ -1,34 +1,79 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='estilos.css'>
-    <script src='main.js'></script>
+
 </head>
+
 <body>
-    <div class="Apartamento">
-        <div class="SeccionSuperior">
-            <div  class="HabitacionPricipal">
-                <div class="Habitacion"><a class="Text">Habitacion Principal</a></div>
-                <div class="BañoHabitacion"><a class="Text">Baño Habitacion</a></div>
+    <div class="container">
+        <div class="Apartamento">
+            <div class="SeccionSuperior">
+                <div class="HabitacionPricipal">
+                    <div class="Habitacion"><a class="Text">Habitacion Principal</a></div>
+                    <div class="BañoHabitacion"><a class="Text">Baño Habitacion</a></div>
+                </div>
+                <div class="HabitacionSecundaria"><a class="Text">Habitacion #2</a></div>
+                <div class="CocinaZonalavado">
+                    <div class="Zonalavado"><a class="Text">Zona de lavado5</a></div>
+                    <div class="cocina"><a class="Text">Cocina</a></div>
+                </div>
             </div>
-            <div class="HabitacionSecundaria"><a class="Text">Habitacion #2</a></div>
-            <div class="CocinaZonalavado">
-                <div class="Zonalavado"><a class="Text">Zona de lavado5</a></div>
-                <div class="cocina"><a class="Text">Cocina</a></div>
+            <div class="SeccionInferior">
+                <div class="HabitacionTerciaria"><a class="Text">Habitacion #3</a></div>
+                <div class="BañoSocial"><a class="Text">Baño Social</a></div>
+                <div class="SalaComedor">
+                    <div class="Sala"><a class="Text">Sala</a></div>
+                    <div class="Comedor"> <a class="Text">Comedor</a></div>
+                </div>
             </div>
         </div>
-        <div class="SeccionInferior">
-            <div class="HabitacionTerciaria"><a class="Text">Habitacion #3</a></div>
-            <div class="BañoSocial"><a class="Text">Baño Social</a></div>
-            <div class="SalaComedor">
-            <div class="Sala"><a class="Text">Sala</a></div>    
-            <div class="Comedor"> <a class="Text">Comedor</a></div>   
-            </div>
+        <div>
+            <button onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
+            <p id="mostrar"></p>
         </div>
     </div>
+    <script>
+        let reconocimientoDeVoz;
+        let apagarDespuesDe;
+        const TIEMPO_MAXIMO_SILENCIO = 10; // en segundos
+        
+        function activarReconocimientoDeVoz() {
+          reconocimientoDeVoz = new webkitSpeechRecognition();
+          reconocimientoDeVoz.lang = "es-ES";
+          reconocimientoDeVoz.interimResults = true;
+          reconocimientoDeVoz.maxSilence = TIEMPO_MAXIMO_SILENCIO;
+          
+          const texto = document.getElementById("mostrar");
+        
+          reconocimientoDeVoz.onresult = function (event) {
+            const resultado = event.results[0][0].transcript;
+            texto.textContent = resultado;
+          };
+      
+          reconocimientoDeVoz.onend = function () {
+            document.querySelector("button").textContent = "Activar micrófono";
+            document.querySelector("button").onclick = function() {activarReconocimientoDeVoz()};
+          }
+        
+          reconocimientoDeVoz.start();
+        
+          document.querySelector("button").textContent = "Desactivar micrófono";
+          document.querySelector("button").onclick = function() {desactivarReconocimientoDeVoz()};
+        }
+      
+        function desactivarReconocimientoDeVoz() {
+          reconocimientoDeVoz.stop();
+          document.querySelector("button").textContent = "Activar micrófono";
+          document.querySelector("button").onclick = function() {activarReconocimientoDeVoz()};
+          clearTimeout(apagarDespuesDe);
+        }
+      </script>
 </body>
+
 </html>
