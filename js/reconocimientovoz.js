@@ -57,9 +57,17 @@ function procesarResultado(resultado) {
                     texto_resultado.textContent= resultado;
                 }
             } else if (resultado.includes('principal')) {
-                resultado = 'No se especifica la habitación';
+                resultado = 'Abriendo puerta principal';
                 texto_resultado.textContent= resultado;
                 console.log('principal');
+            } else if (resultado.includes('baño')){
+                if (resultado.includes('social')){
+                    resultado = 'Abriendo puerta baño social';
+                    texto_resultado.textContent= resultado;
+                } else if (resultado.includes('privado')){
+                    resultado = 'Abriendo puerta baño privado';
+                    texto_resultado.textContent= resultado;
+                }
             }
         } else if (resultado.includes('ventana')) {
             if (resultado.includes('habitación')) {
@@ -73,6 +81,14 @@ function procesarResultado(resultado) {
                     }
                 } else {
                     resultado = 'No se especifica la habitación'; 
+                    texto_resultado.textContent= resultado;
+                }
+            } else if (resultado.includes('baño')){
+                if (resultado.includes('social')){
+                    resultado = 'Abriendo ventana del baño social';
+                    texto_resultado.textContent= resultado;
+                } else if (resultado.includes('privado')){
+                    resultado = 'Abriendo ventana del baño privado';
                     texto_resultado.textContent= resultado;
                 }
             }
