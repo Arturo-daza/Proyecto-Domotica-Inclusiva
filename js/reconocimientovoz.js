@@ -107,33 +107,3 @@ function extraerNumero(resultado) {
         return null; // Retorna null si no se encontraron números en la cadena
     }
 }
-
-function convertirTextoAVoz(texto) {
-    // Comprobamos si el navegador admite la API Web Speech
-    if ('speechSynthesis' in window) {
-      
-      // Creamos una instancia de SpeechSynthesisUtterance
-      const speech = new SpeechSynthesisUtterance();
-  
-      // Definimos las opciones predeterminadas de la voz
-      speech.lang = 'es-ES'; // Establecemos el idioma en español
-      speech.pitch = 1; // Establecemos el tono en 1 (valor predeterminado)
-      speech.rate = 1; // Establecemos la velocidad en 1 (valor predeterminado)
-      speech.volume = 1; // Establecemos el volumen en 1 (valor predeterminado)
-  
-      // Asignamos el texto al objeto SpeechSynthesisUtterance
-      speech.text = texto;
-  
-      // Agregamos el evento onend al objeto SpeechSynthesisUtterance
-      speech.onend = () => {
-        // Cerramos el canal de mensajes después de que se completa la conversión de texto a voz
-        window.speechSynthesis.cancel();
-      };
-  
-      // Llamamos a la función speak() para que comience la conversión de texto a voz
-      window.speechSynthesis.speak(speech);
-    } else {
-      // Si el navegador no admite la API Web Speech, mostramos un mensaje de error
-      alert('Lo siento, tu navegador no admite la API Web Speech');
-    }
-  }
