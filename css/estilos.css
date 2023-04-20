@@ -22,11 +22,12 @@ display: inline-block;
     display: inline-block;
 
 }
-.HabitacionPricipal{
+#HabitacionPricipal{
     width:40%;
     height: 100%;
     outline: 1px solid #000000;
     display: inline-block;
+    background-color: aliceblue;
     
     
 }
@@ -119,9 +120,9 @@ display: inline-block;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: white;
+  color: black;
 }
-.Habitacion:hover{
+/* .Habitacion:hover{
     background-color: red;
     color: black;
 }
@@ -156,4 +157,4 @@ color: black;
 .Zonalavado:hover{
     background-color:wheat;
     color: black;
-}
+} */
