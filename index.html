@@ -6,29 +6,35 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='css/estilos.css'>
-    <script src="js/reconocimientovoz.js"></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/estilosPlano.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/estilosBotones.css'>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://unpkg.com/ml5@0.7.1/dist/ml5.min.js"></script>
 
 </head>
 
 <body>
     <div class="container">
-        
+
         <div class="Apartamento">
             <div class="SeccionSuperior">
                 <div id="HabitacionPricipal">
                     <div class="Habitacion"><a class="Text">Habitacion Principal</a>
                         <div class="puertaHabitacionPrincipal"> </div>
                         <div class="ventanaHabitacion"></div>
-                </div>
-                    <div class="BañoHabitacion"><a class="Text">Baño Habitacion</a> <div class="PuetabañoHabitacion"></div>
-                        <div class="VentanaSuperior"> </div> 
+                    </div>
+                    <div class="BañoHabitacion"><a class="Text">Baño Habitacion</a>
+                        <div class="PuetabañoHabitacion"></div>
+                        <div class="VentanaSuperior"> </div>
                     </div>
                 </div>
-                <div class="HabitacionSecundaria"><a class="Text">Habitacion #2</a><div class="puertaHabitacionPrincipal"></div></div>
+                <div class="HabitacionSecundaria"><a class="Text">Habitacion #2</a>
+                    <div class="puertaHabitacionPrincipal"></div>
+                </div>
                 <div class="CocinaZonalavado">
                     <div class="Zonalavado"><a class="Text">Zona de lavado5</a>
-                        <div class="VentanaSuperior"> </div> 
+                        <div class="VentanaSuperior"> </div>
                     </div>
                     <div class="cocina"><a class="Text">Cocina</a>
                         <div class="VentanaCocina"> </div>
@@ -37,31 +43,39 @@
             </div>
             <div class="SeccionInferior">
                 <div class="PuertaPrincipal"></div>
-                <div class="HabitacionTerciaria"><a class="Text">Habitacion #3</a><div class="PuertaHabitacion3"> </div>
+                <div class="HabitacionTerciaria"><a class="Text">Habitacion #3</a>
+                    <div class="PuertaHabitacion3"> </div>
                     <div class="ventanaHabitacion"></div>
                 </div>
                 <div class="BañoSocial"><a class="Text">Baño Social</a>
                     <div class="PuertaBañoSocial"> </div>
                     <div class="VentanaInferior"> </div>
-                 </div>
+                </div>
                 <div class="SalaComedor">
                     <div class="Sala"><a class="Text">Sala</a>
                         <div class="VentanaInferior"> </div>
                     </div>
                     <div class="Comedor"> <a class="Text">Comedor</a>
-                        <div class="VentanaInferior"> </div></div>
+                        <div class="VentanaInferior"> </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div>
-            <button onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
-            <p id="mostrar"></p>
-            <p id="resulado"></p>
-        </div>
-    </div>
-    <script>
+        <section id="acciones">
+            <div id="buttons">
+                <button id="detecionVoice" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
+                <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
+            </div>
+            <div id="resulst">
+                <p id="mostrar"></p>
+                <p id="resulado"></p>
+            </div>
+            <div id="canvas-container"></div>
 
-    </script>
+        </section>
+    </div>
+    <script src="js/reconocimientovoz.js"></script>
+    <script src="js/detectarObjetos.js"></script>
 </body>
 
 </html>
