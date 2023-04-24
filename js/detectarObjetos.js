@@ -13,7 +13,9 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(50, 50);
+  createCanvas(0, 0);
+  
+  
 }
 function activarVideo() {
   if (detecting) {
@@ -22,11 +24,13 @@ function activarVideo() {
     createCanvas(640, 480);
     const canvas = document.getElementById('defaultCanvas0');
     canvasContainer.appendChild(canvas);
+    canvas.style.width='400px'
+    canvas.style.height='400px'
     video = createCapture(VIDEO);
     video.size(640, 480);
     video.hide();
     video.elt.addEventListener('loadeddata', function () {
-      setTimeout(toggleDetecting, 3000);
+      setTimeout(toggleDetecting, 1000);
     });
   }
 }
@@ -34,10 +38,13 @@ function activarVideo() {
 function desactivarVideo() {
   detecting = false;
   video.stop();
+  video.remove();
   detections = [];
   detectionAction.innerText = 'Detectar Objetos';
-  createCanvas(50, 50);
-  ml5.dispose();
+  createCanvas(0, 0);
+  const div =  document.querySelector(".vsc-controller");
+  div.classList.remove('vsc-controller vsc-nosource')
+  // ml5.dispose();
 }
 
 function draw() {
