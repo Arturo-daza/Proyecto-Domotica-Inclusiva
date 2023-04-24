@@ -44,7 +44,6 @@ function desactivarVideo() {
   createCanvas(0, 0);
   const div =  document.querySelector(".vsc-controller");
   div.classList.remove('vsc-controller vsc-nosource')
-  // ml5.dispose();
 }
 
 function draw() {
