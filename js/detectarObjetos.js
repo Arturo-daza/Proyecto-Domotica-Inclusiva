@@ -43,7 +43,7 @@ function desactivarVideo() {
   detectionAction.innerText = 'Detectar Objetos';
   createCanvas(0, 0);
   const div =  document.querySelector(".vsc-controller");
-  div.classList.remove('vsc-controller vsc-nosource')
+  // div.classList.remove('vsc-controller vsc-nosource')
 }
 
 function draw() {

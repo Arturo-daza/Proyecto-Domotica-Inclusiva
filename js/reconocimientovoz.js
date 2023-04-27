@@ -41,6 +41,7 @@ function activarReconocimientoDeVoz() {
         texto.textContent = resultado;
         if (resultado.includes(".")) {
             procesarResultado(resultado);
+            cambiarPlano();
         }
     };
 
@@ -64,6 +65,8 @@ function desactivarReconocimientoDeVoz() {
 
 function procesarResultado(resultado) {
     // Minuscula  para analizar la cadena de caracteres
+    
+    console.log('Cambiando plano');
     resultado = resultado.toLowerCase();
     const numero = extraerNumero(resultado);
     const texto_resultado = document.getElementById("resulado");
@@ -78,7 +81,6 @@ function procesarResultado(resultado) {
                         if (ubicacionesPuerta[habitacion] === false) {
                             respuesta = `Abriendo puerta habitación ${numero}.`;
                             ubicacionesPuerta[habitacion] = true;
-                            cambiarPlano(habitacion, ubicacionesPuerta[habitacion]);
                         } else {
                             respuesta = `La puerta de la habitación ${numero} ya está abierta.`;
                         }
@@ -89,6 +91,7 @@ function procesarResultado(resultado) {
                     respuesta = 'No se especifica la habitación.';
                     texto_resultado.textContent = respuesta;
                     convertirTextoAVoz(respuesta);
+                    
                 }
                 texto_resultado.textContent = respuesta;
                 convertirTextoAVoz(respuesta);
@@ -437,10 +440,26 @@ function convertirTextoAVoz(texto) {
 }
 
 
-function cambiarPlano(lugar, estado) {
-    if (lugar == 'habitacion1' & estado === true ){
-            const habitacionPrincipal = document.getElementById('HabitacionPricipal')
-            habitacionPrincipal.style.backgroundColor = 'yellow';
-    }
+function cambiarPlano() {
     
+
+    // if (lugar == 'habitacion1' & estado === true) {
+    //     const habitacionPrincipal = document.getElementById('HabitacionPricipal')
+    //     habitacionPrincipal.style.backgroundColor = 'yellow';
+    // }
+
+    for (let ubicacion in ubicacionesPuerta) {
+        const elemento = document.querySelector(`.puerta${capitalizarPrimeraLetra(ubicacion)}`);         
+        if (ubicacionesPuerta[ubicacion]) {
+            elemento.classList.add('puerta_abierta');
+        } else {
+            elemento.classList.remove('puerta_abierta');
+        }
+    }
+
+    function capitalizarPrimeraLetra(cadena) {
+        return cadena.charAt(0).toUpperCase() + cadena.slice(1);
+      }
+
+
 }

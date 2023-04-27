@@ -1,159 +1,185 @@
 body {
     display: flex;
-    justify-content: center; /* Centra horizontalmente el div */
-    align-items: center; /* Centra verticalmente el div */
-    height: 100vh; /* Establece la altura del contenedor al 100% de la altura de la ventana */
-  }
+    justify-content: center;
+    /* Centra horizontalmente el div */
+    align-items: center;
+    /* Centra verticalmente el div */
+    height: 100vh;
+    /* Establece la altura del contenedor al 100% de la altura de la ventana */
+}
 
-.container{
+.container {
     display: flex;
 }
 
-  
-.Apartamento{
+
+.Apartamento {
     height: 500px;
     width: 800px;
     border: solid black;
     margin-left: 3rem;
 }
-.SeccionSuperior{
-    width:100%;
+
+.SeccionSuperior {
+    width: 100%;
     height: 50%;
 
     display: inline-block;
 }
-.SeccionInferior{
-    width:100%;
+
+.SeccionInferior {
+    width: 100%;
     height: 50%;
     position: relative;
     display: inline-block;
 
 }
-.PuertaPrincipal{
+
+.PuertaPrincipal {
     background-color: red;
     width: 0.5%;
     height: 20%;
     position: absolute;
-    top:7%;
+    top: 7%;
     left: 100%;
 }
-#HabitacionPricipal{
-    width:40%;
+
+#HabitacionPricipal {
+    width: 40%;
     height: 100%;
     outline: 1px solid #000000;
     display: inline-block;
     background-color: aliceblue;
-    
-    
+
+
 }
-.BañoHabitacion{
-     width:28%;
-    height:100%;
+
+.BañoHabitacion {
+    width: 28%;
+    height: 100%;
     text-align: center;
     display: inline-block;
     position: relative;
     outline: 1px solid #000000;
 
 }
-.Habitacion{
-    width:70%;
-    height:100%;
+
+#habitacion1 {
+    width: 70%;
+    height: 100%;
     display: inline-block;
     position: relative;
     outline: 1px solid #000000;
-    
-    
 }
 
-.HabitacionSecundaria{
-    width:30%;
+.HabitacionSecundaria {
+    width: 30%;
     height: 100%;
     outline: 1px solid #000000;
     display: inline-block;
     margin: 0;
     position: relative;
 }
-.CocinaZonalavado{
-    width:29%;
+
+.CocinaZonalavado {
+    width: 29%;
     height: 100%;
     outline: 1px solid #000000;
     display: inline-block;
 }
-.HabitacionTerciaria{
-    width:20%;
+
+.HabitacionTerciaria {
+    width: 20%;
     height: 100%;
     outline: 1px solid #000000;
     display: inline-block;
     margin: 0;
     position: relative;
 }
-.BañoSocial{
-    width:25%;
+
+.BañoSocial {
+    width: 25%;
     height: 70%;
     outline: 1px solid #000000;
     display: inline-block;
     margin: 0;
     position: relative;
 }
-.Zonalavado{
-    width:60%;
+
+.Zonalavado {
+    width: 60%;
     height: 30%;
     outline: 1px solid #000000;
     position: relative;
 }
-.cocina{
-    width:100%;
+
+.cocina {
+    width: 100%;
     height: 70%;
     outline: 1px solid #000000;
     text-align: center;
     position: relative;
 }
-.SalaComedor{
-    width:52%;
+
+.SalaComedor {
+    width: 52%;
     height: 70%;
     outline: 1px solid #000000;
     display: inline-block;
 
 }
-.Sala{
-    width:50%;
-    height:100%;
+
+.Sala {
+    width: 50%;
+    height: 100%;
     display: inline-block;
     position: relative;
 
-   
+
 }
-.Comedor{
-    width:45%;
-    height:100%;
+
+.Comedor {
+    width: 45%;
+    height: 100%;
     text-align: center;
     display: inline-block;
     position: relative;
 }
-.Text{
+
+.Text {
     position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
 }
-.puertaHabitacionPrincipal{
-    background-color: red;
+
+.puertaHabitacion1 {
+    background-color: brown;
     width: 15%;
     height: 2%;
     position: absolute;
     top: 98%;
     left: 80%;
+    transform-origin: top left;
+    transition: transform 1s ease;
 }
-.PuetabañoHabitacion{
+
+/* Estilos de la puerta abierta */
+#habitacion1 .puerta_abierta{
+    transform: rotate(-90deg) translateX(-20%);
+}
+
+.PuetabañoHabitacion {
     background-color: red;
     width: 2%;
     height: 15%;
     position: absolute;
-   
+
 }
-.PuertaHabitacion3{
+
+.PuertaHabitacion3 {
     background-color: red;
     width: 2%;
     height: 15%;
@@ -161,47 +187,57 @@ body {
     left: 98%;
     top: 5%;
 }
-.PuertaBañoSocial{
+
+.PuertaBañoSocial {
     background-color: red;
     width: 15%;
     height: 2%;
     position: absolute;
     left: 80%;
 }
-.ventanaHabitacion{
+
+.ventanaHabitacion {
     background-color: blue;
     width: 2%;
     height: 40%;
     position: absolute;
     top: 30%;
-   
+    transition: transform 1s ease;
 }
-.VentanaInferior{
+
+/* Estilos de la ventana abierta */
+.abierta .ventana {
+    transform: rotate(90deg) translateY(-50%);
+}
+
+.VentanaInferior {
     background-color: blue;
     width: 40%;
     height: 2%;
     position: absolute;
-    top: 98%; 
+    top: 98%;
     left: 30%;
 }
-.VentanaCocina{
+
+.VentanaCocina {
     background-color: blue;
     width: 2%;
     height: 40%;
     position: absolute;
     top: 30%;
-    left:98%;
+    left: 98%;
 }
-.VentanaSuperior{
+
+.VentanaSuperior {
 
     background-color: blue;
     width: 40%;
     height: 2%;
     position: absolute;
-    
-    left: 30%;
 
+    left: 30%;
 }
+
 /* .Habitacion:hover{
     background-color: red;
     color: black;
