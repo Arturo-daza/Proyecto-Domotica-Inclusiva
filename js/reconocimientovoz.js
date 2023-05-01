@@ -1,9 +1,8 @@
 let reconocimientoDeVoz;
 let apagarDespuesDe;
 const tiempoMaximoSilencio = 10;
-
 const ubicacionesPuerta = {
-    'habitacion1': false,
+    'habitacion1': true,
     'habitacion2': false,
     'habitacion3': false,
     'bañoSocial': false,
@@ -28,7 +27,6 @@ const ubicacionesLuz = {
     'cocina': false,
     'lavado': false
 }
-
 function activarReconocimientoDeVoz() {
     reconocimientoDeVoz = new webkitSpeechRecognition();
     reconocimientoDeVoz.lang = "es-ES";

@@ -49,8 +49,6 @@ body {
     width: 40%;
     height: 100%;
     display: inline-block;
-    background-color: aliceblue;
-
 
 }
 
@@ -65,13 +63,6 @@ body {
     border-left: 2px solid black;
     margin-left: -1.5%;
     
-
-    
-
-    
-    
-
-
 }
 
 #habitacion1 {
@@ -80,13 +71,7 @@ body {
     display: inline-block;
     position: relative;
     box-sizing: border-box;
-    
-    border-bottom: 2px solid black;
-    
-    
-    
-
-    
+    border-bottom: 2px solid black;  
 }
 
 .habitacion2 {
@@ -97,14 +82,13 @@ body {
     position: relative;
     box-sizing: border-box;
     border-bottom: 2px solid black;
-    
     border-left: 2px solid black;
     margin: 0;
     margin-left: -1.5%;
 
 }
 
-.cocinaZonalavado {
+.cocinaZonaLavado {
     width: 30.8%;
     height: 100%;
     margin-left: -0.5%;
@@ -112,6 +96,20 @@ body {
     border-bottom: 2px solid black;
     border-left: 2px solid black;
 }
+.ventanaLavado {
+    background-color: blue;
+    width: 40%;
+    height: 6%;
+    position: absolute;
+    top:-5%;
+    left: 35%;
+    transition: transform 1s ease;
+}
+.zonaLavado .ventana_abierta{
+    transform:  translateX(-80%);
+    background-color: rgb(123, 123, 255);
+}
+
 
 .habitacion3 {
     width: 20%;
@@ -120,11 +118,6 @@ body {
     position: relative;
     box-sizing: border-box;
     border-right: 2px solid black;
-    
-    
-    
-    
-    
 }
 
 .bañoSocial {
@@ -140,8 +133,18 @@ body {
     margin-left: -.5%;
    
 }
-
-.zonalavado {
+.puertaBañoPrivado {
+    background-color: brown;
+    width: 4%;
+    height: 15%;
+    position: absolute;
+    transform-origin: top right;
+    transition: transform 1s ease;
+}
+.bañoPrivado .puerta_abierta{
+    transform: rotate(-90deg) translateX(20%);
+}
+.zonaLavado {
     width: 60%;
     height: 30%;
     position: relative;
@@ -195,119 +198,145 @@ body {
 .puertaHabitacion1 {
     background-color: brown;
     width: 15%;
-    height: 2%;
+    height: 1%;
     position: absolute;
     top: 98%;
-    left: 80%;
-    transform-origin: top left;
+    left: 85%;
+    transform-origin: top right;
     transition: transform 1s ease;
 }
 
 /* Estilos de la puerta abierta */
 #habitacion1 .puerta_abierta{
-    transform: rotate(-90deg) translateX(-20%);
+    transform: rotate(90deg) translateX(20%);
 }
 
-.puertaBañoPrivado {
-    background-color: red;
-    width: 2%;
-    height: 15%;
-    position: absolute;
-
+.habitacion2 .puerta_abierta{
+    transform: rotate(90deg) translateX(20%);
 }
+
+
 
 .puertaHabitacion3 {
-    background-color: red;
-    width: 2%;
+    background-color: brown;
+    width: 2.2%;
     height: 15%;
     position: absolute;
     left: 98%;
-    top: 5%;
-}
-
-.puertaBañoSocial {
-    background-color: red;
-    width: 15%;
-    height: 2%;
-    position: absolute;
-    left: 80%;
-}
-
-.ventanaHabitacion {
-    background-color: blue;
-    width: 2%;
-    height: 40%;
-    position: absolute;
-    top: 30%;
+    top: 1.5%;
+    transform-origin: top right;
     transition: transform 1s ease;
 }
 
-/* Estilos de la ventana abierta */
-.abierta .ventana {
-    transform: rotate(90deg) translateY(-50%);
+.habitacion3 .puerta_abierta{
+    transform: rotate(90deg) translateX(0%);
 }
 
-.ventanaInferior {
+.puertaBañoSocial {
+    background-color: brown;
+    width: 17.5%;
+    height: 2%;
+    position: absolute;
+    left: 81%;
+    transform-origin: top right;
+    transition: transform 1s ease;
+}
+
+.bañoSocial .puerta_abierta{
+    transform: rotate(-90deg) translateX(2%);
+}
+
+
+
+.ventanaHabitacion {
+    background-color: blue;
+    width: 3%;
+    height: 40%;
+    position: absolute;
+    top: 30%;
+    left: -2.2%;
+    transition: transform 1s ease;
+}
+#habitacion1 .ventana_abierta{
+    transform:  translateY(-70%);
+    background-color: rgb(123, 123, 255);
+}
+.habitacion3 .ventana_abierta{
+    transform:  translateY(-70%);
+    background-color: rgb(123, 123, 255);
+}
+
+
+.sala .ventanaInferior {
     background-color: blue;
     width: 40%;
-    height: 2%;
+    height: 1.8%;
+    position: absolute;
+    top: 98%;
+    left: 55%;
+    transition: transform 1s ease;
+}
+.comedor .ventanaInferior {
+    background-color: blue;
+    width: 40%;
+    height: 1.8%;
+    position: absolute;
+    top: 98%;
+    left: -10%;
+    transition: transform 1s ease;
+}
+.sala .ventana_abierta{
+    transform:  translateX(-70%);
+    background-color: rgb(123, 123, 255);
+}
+.comedor .ventana_abierta{
+    transform:  translateX(70%);
+    background-color: rgb(123, 123, 255);
+}
+.bañoSocial .ventanaInferior {
+    background-color: blue;
+    width: 40%;
+    height: 1.8%;
     position: absolute;
     top: 98%;
     left: 30%;
+    transition: transform 1s ease;
+}
+.bañoSocial .ventana_abierta{
+    transform:  translateX(70%);
+    background-color: rgb(123, 123, 255);
 }
 
 .ventanaCocina {
     background-color: blue;
-    width: 2%;
+    width: 1.5%;
     height: 40%;
     position: absolute;
     top: 30%;
-    left: 98%;
+    left: 99.5%;
+
+    transition: transform 1s ease;
+}
+.cocina .ventana_abierta{
+    transform:  translateY(-70%);
+    background-color: rgb(123, 123, 255);
 }
 
 .ventanaSuperior {
-
     background-color: blue;
     width: 40%;
     height: 2%;
     position: absolute;
     top:-2%;
-    left: 30%;
+    left: 35%;
+    transition: transform 1s ease;
+}
+.habitacion2 .ventana_abierta{
+    transform:  translateX(-70%);
+    background-color: rgb(123, 123, 255);
 }
 
-/* .Habitacion:hover{
-    background-color: red;
-    color: black;
+.bañoPrivado .ventana_abierta{
+    transform:  translateX(40%);
+    background-color: rgb(123, 123, 255);
 }
-.BañoHabitacion:hover{
-    background-color: rgb(1, 132, 214);
-    color: black;
-}
-.HabitacionSecundaria:hover{
-    background-color: blueviolet;
-    color: black;
-}
-.HabitacionTerciaria:hover{
-    background-color: aquamarine;
-    color: black;
-}
-.BañoSocial:hover{
-background-color: brown;
-color: black;
-}
-.Comedor:hover{
-    background-color: cornflowerblue;
-    color: black;
-}
-.Sala:hover{
-    background-color: green;
-    color: black;
-}
-.cocina:hover{
-    background-color: mediumspringgreen;
-    color: black;
-}
-.Zonalavado:hover{
-    background-color:wheat;
-    color: black;
-} */
