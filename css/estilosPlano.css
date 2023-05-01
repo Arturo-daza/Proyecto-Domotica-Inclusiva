@@ -18,6 +18,8 @@ body {
     width: 800px;
     border : solid black;
     margin-left: 3rem;
+    background-image: url('/images/pisoMadera.jpeg');
+    filter: brightness(1.3);
 }
 
 .seccionSuperior {
@@ -32,8 +34,11 @@ body {
     position: relative;
     display: inline-block;
     margin-top: -0.5%;
+}
 
-
+.bañoPrivado, .bañoSocial {
+    background-image: url('/images/baldosaBaño.jpg');
+    background-size: cover;
 }
 
 .puertaPrincipal {
@@ -45,7 +50,7 @@ body {
     left: 100%;
 }
 
-#habitacionPrincipal {
+.habitacionPrincipal {
     width: 40%;
     height: 100%;
     display: inline-block;
@@ -65,13 +70,39 @@ body {
     
 }
 
-#habitacion1 {
+.habitacion1 {
     width: 70%;
     height: 100%;
     display: inline-block;
     position: relative;
     box-sizing: border-box;
     border-bottom: 2px solid black;  
+}
+
+.habitacion1, .habitacion2, .habitacion3, .salaComedor{
+    background-image: url('/images/pisoMadera.jpeg');
+}
+.habitacion2.luz_encendida, 
+.habitacion1.luz_encendida, 
+.salaComedor.luz_encendida,
+.habitacion3.luz_encendida{
+    filter: brightness(1.2);
+    transition: filter 1.5s ease-in-out;
+}
+.bañoPrivado.luz_encendida,
+.bañoSocial.luz_encendida, 
+.cocina.luz_encendida{
+    filter: brightness(1.1);
+    transition: filter 1.5s ease-in-out;
+}
+.zonaLavado.luz_encendida{
+    filter: brightness(2);
+    transition: filter 1.5s ease-in-out;
+}
+
+.cocinaZonaLavado .Text{
+    color: rgb(0, 0, 0);
+    font-weight: 200;
 }
 
 .habitacion2 {
@@ -96,6 +127,7 @@ body {
     border-bottom: 2px solid black;
     border-left: 2px solid black;
 }
+
 .ventanaLavado {
     background-color: blue;
     width: 40%;
@@ -145,17 +177,27 @@ body {
     transform: rotate(-90deg) translateX(20%);
 }
 .zonaLavado {
-    width: 60%;
-    height: 30%;
+    width: 100%;
+    height: 40%;
     position: relative;
+    box-sizing: border-box;
+    border-bottom: 2px solid black;
+    background-image: url('/images/baldosaNegra.jpeg');
+    filter: brightness(2);
+    background-size: cover;
+
 }
 
 .cocina {
     width: 100%;
-    height: 70%;
+    height: 60%;
     box-sizing: border-box;
     text-align: center;
     position: relative;
+    background-image: url('/images/baldosaCocica.jpg');
+    background-size: cover;
+    filter: opacity(0.7);
+
 }
 
 .salaComedor {
@@ -195,7 +237,7 @@ body {
     color: black;
 }
 
-.puertaHabitacion1 {
+.puert.Habitacion1 {
     background-color: brown;
     width: 15%;
     height: 1%;
@@ -207,7 +249,7 @@ body {
 }
 
 /* Estilos de la puerta abierta */
-#habitacion1 .puerta_abierta{
+.habitacion1 .puerta_abierta{
     transform: rotate(90deg) translateX(20%);
 }
 
@@ -257,7 +299,7 @@ body {
     left: -2.2%;
     transition: transform 1s ease;
 }
-#habitacion1 .ventana_abierta{
+.habitacion1 .ventana_abierta{
     transform:  translateY(-70%);
     background-color: rgb(123, 123, 255);
 }
