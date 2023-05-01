@@ -2,7 +2,7 @@ let reconocimientoDeVoz;
 let apagarDespuesDe;
 const tiempoMaximoSilencio = 10;
 const ubicacionesPuerta = {
-    'habitacion1': true,
+    'habitacion1': false,
     'habitacion2': false,
     'habitacion3': false,
     'bañoSocial': false,
@@ -15,7 +15,9 @@ const ubicacionesVentana = {
     'habitacion3': false,
     'bañoSocial': false,
     'bañoPrivado': false,
-    'cocina': false
+    'cocina': false,
+    'lavado':false, 
+    'salaComedor':true
 };
 
 const ubicacionesLuz = {
@@ -25,7 +27,8 @@ const ubicacionesLuz = {
     'bañoSocial': false,
     'bañoPrivado': false,
     'cocina': false,
-    'lavado': false
+    'lavado': false,
+    'salaComedor':true
 }
 function activarReconocimientoDeVoz() {
     reconocimientoDeVoz = new webkitSpeechRecognition();
@@ -35,8 +38,9 @@ function activarReconocimientoDeVoz() {
     const texto = document.getElementById("mostrar");
 
     reconocimientoDeVoz.onresult = function (event) {
-        const resultado = event.results[0][0].transcript;
+        let resultado = event.results[event.results.length - 1][0].transcript;
         texto.textContent = resultado;
+        console.log(resultado);
         if (resultado.includes(".")) {
             procesarResultado(resultado);
             cambiarPlano();
@@ -62,9 +66,6 @@ function desactivarReconocimientoDeVoz() {
 }
 
 function procesarResultado(resultado) {
-    // Minuscula  para analizar la cadena de caracteres
-    
-    console.log('Cambiando plano');
     resultado = resultado.toLowerCase();
     const numero = extraerNumero(resultado);
     const texto_resultado = document.getElementById("resulado");
@@ -382,6 +383,11 @@ function procesarResultado(resultado) {
                 } else {
                     respuesta = 'La luz del lavado ya está apagada.'
                 }
+            }else if (resultado.includes('todas')){
+                for (let ubicacion in ubicacionesPuerta) {
+                    ubicacionesPuerta[ubicacion]= false;
+                }
+            
             } else {
                 respuesta = 'No se especifica cual luz apagar.';
             }
@@ -439,12 +445,6 @@ function convertirTextoAVoz(texto) {
 
 
 function cambiarPlano() {
-    
-
-    // if (lugar == 'habitacion1' & estado === true) {
-    //     const habitacionPrincipal = document.getElementById('HabitacionPricipal')
-    //     habitacionPrincipal.style.backgroundColor = 'yellow';
-    // }
 
     for (let ubicacion in ubicacionesPuerta) {
         const elemento = document.querySelector(`.puerta${capitalizarPrimeraLetra(ubicacion)}`);         
@@ -455,9 +455,25 @@ function cambiarPlano() {
         }
     }
 
-    function capitalizarPrimeraLetra(cadena) {
-        return cadena.charAt(0).toUpperCase() + cadena.slice(1);
-      }
+    for (let ubicacion in ubicacionesVentana) {
+        const elemento = document.querySelector(`.ventana${capitalizarPrimeraLetra(ubicacion)}`);         
+        if (ubicacionesVentana[ubicacion]) {
+            elemento.classList.add('ventana_abierta');
+        } else {
+            elemento.classList.remove('ventana_abierta');
+        }
+    }
 
-
+    for (let ubicacion in ubicacionesLuz) {
+        const elemento = document.querySelector(`.luz${capitalizarPrimeraLetra(ubicacion)}`);  
+        if (ubicacionesLuz[ubicacion]) {
+            elemento.classList.add('luz_encendida');
+        } else {
+            elemento.classList.remove('luz_encendida');
+        }
+    }
 }
+
+function capitalizarPrimeraLetra(cadena) {
+    return cadena.charAt(0).toUpperCase() + cadena.slice(1);
+  }

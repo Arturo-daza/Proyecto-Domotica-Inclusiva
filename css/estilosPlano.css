@@ -16,7 +16,7 @@ body {
 .apartamento {
     height: 500px;
     width: 800px;
-    border : solid black;
+    border : 5px solid black;
     margin-left: 3rem;
     background-image: url('/images/pisoMadera.jpeg');
     filter: brightness(1.3);
@@ -34,6 +34,7 @@ body {
     position: relative;
     display: inline-block;
     margin-top: -0.5%;
+    border-bottom: 5px solid black;
 }
 
 .bañoPrivado, .bañoSocial {
@@ -96,12 +97,12 @@ body {
     transition: filter 1.5s ease-in-out;
 }
 .zonaLavado.luz_encendida{
-    filter: brightness(2);
+    filter: brightness(2.5);
     transition: filter 1.5s ease-in-out;
 }
 
-.cocinaZonaLavado .Text{
-    color: rgb(0, 0, 0);
+.zonaLavado .Text{
+    color: rgb(134, 131, 131);
     font-weight: 200;
 }
 
@@ -183,7 +184,7 @@ body {
     box-sizing: border-box;
     border-bottom: 2px solid black;
     background-image: url('/images/baldosaNegra.jpeg');
-    filter: brightness(2);
+    filter: brightness(1.5);
     background-size: cover;
 
 }
@@ -237,7 +238,7 @@ body {
     color: black;
 }
 
-.puert.Habitacion1 {
+.puertaHabitacion1, .puertaHabitacion2 {
     background-color: brown;
     width: 15%;
     height: 1%;
@@ -290,7 +291,7 @@ body {
 
 
 
-.ventanaHabitacion {
+.ventanaHabitacion1, .ventanaHabitacion3 {
     background-color: blue;
     width: 3%;
     height: 40%;
@@ -327,11 +328,14 @@ body {
     left: -10%;
     transition: transform 1s ease;
 }
-.sala .ventana_abierta{
+
+.salaComedor.ventana_abierta .sala .ventanaSala{
     transform:  translateX(-70%);
     background-color: rgb(123, 123, 255);
 }
-.comedor .ventana_abierta{
+
+
+.salaComedor.ventana_abierta .comedor .ventanaComedor{
     transform:  translateX(70%);
     background-color: rgb(123, 123, 255);
 }
