@@ -30,34 +30,36 @@ const ubicacionesLuz = {
     'lavado': false,
     'salaComedor':true
 }
+
 function activarReconocimientoDeVoz() {
-    reconocimientoDeVoz = new webkitSpeechRecognition();
+    const reconocimientoDeVoz = new webkitSpeechRecognition();
     reconocimientoDeVoz.lang = "es-ES";
     reconocimientoDeVoz.interimResults = true;
     reconocimientoDeVoz.maxSilence = tiempoMaximoSilencio;
     const texto = document.getElementById("mostrar");
+    let ultimaLinea = "";
 
     reconocimientoDeVoz.onresult = function (event) {
-        let resultado = event.results[event.results.length - 1][0].transcript;
-        texto.textContent = resultado;
-        console.log(resultado);
-        if (resultado.includes(".")) {
-            procesarResultado(resultado);
-            cambiarPlano();
+        const resultados = event.results;
+        for (let i = event.resultIndex; i < resultados.length; i++) {
+            const resultado = resultados[i][0].transcript;
+            texto.textContent = resultado;
+            ultimaLinea = resultado;
         }
     };
 
     reconocimientoDeVoz.onend = function () {
         document.querySelector("button").textContent = "Activar micrófono";
         document.querySelector("button").onclick = function () { activarReconocimientoDeVoz() };
+        procesarResultado(ultimaLinea);
+        cambiarPlano();
     }
 
     reconocimientoDeVoz.start();
 
     document.querySelector("button").textContent = "Desactivar micrófono";
-    document.querySelector("button").onclick = function () { desactivarReconocimientoDeVoz() };
+    document.querySelector("button").onclick = function () { desactivarReconocimientoDeVoz() };
 }
-
 function desactivarReconocimientoDeVoz() {
     reconocimientoDeVoz.stop();
     document.querySelector("button").textContent = "Activar micrófono";
