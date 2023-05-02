@@ -77,7 +77,7 @@ function procesarResultado(resultado) {
     var respuesta = "No se reconoce el comando";
     // Codigo abrir puerta
     if (resultado.includes('abrir')) {
-        if (resultado.includes('puerta')) {
+        if (resultado.includes('puerta') && manejoPuertas) {
             if (resultado.includes('habitación')) {
                 if (numero) {
                     if (numero <= 3) {
@@ -121,8 +121,11 @@ function procesarResultado(resultado) {
                 texto_resultado.textContent = respuesta;
                 convertirTextoAVoz(respuesta);
             }
-        }
-        else if (resultado.includes('ventana')) {
+        } else if (resultado.includes('puerta') && !manejoPuertas){
+            respuesta = 'Estan desactivadas las puertas';
+            texto_resultado.textContent = respuesta;
+            convertirTextoAVoz(respuesta);
+        } else if (resultado.includes('ventana')) {
             if (resultado.includes('habitación')) {
                 const numeroHabitacion = extraerNumero(resultado);
                 if (numeroHabitacion) {
@@ -450,13 +453,14 @@ function convertirTextoAVoz(texto) {
 
 
 function cambiarPlano() {
-
-    for (let ubicacion in ubicacionesPuerta) {
-        const elemento = document.querySelector(`.puerta${capitalizarPrimeraLetra(ubicacion)}`);         
-        if (ubicacionesPuerta[ubicacion]) {
-            elemento.classList.add('puerta_abierta');
-        } else {
-            elemento.classList.remove('puerta_abierta');
+    if(manejoPuertas){
+        for (let ubicacion in ubicacionesPuerta) {
+            const elemento = document.querySelector(`.puerta${capitalizarPrimeraLetra(ubicacion)}`);         
+            if (ubicacionesPuerta[ubicacion]) {
+                elemento.classList.add('puerta_abierta');
+            } else {
+                elemento.classList.remove('puerta_abierta');
+            }
         }
     }
 

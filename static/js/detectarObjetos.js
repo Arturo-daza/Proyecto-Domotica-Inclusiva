@@ -14,20 +14,19 @@ function preload() {
 
 function setup() {
   createCanvas(0, 0);
-  
-  
+
+
 }
 function activarVideo() {
-  console.log(detecting);
   if (detecting) {
     toggleDetecting();
-    detecting=false;
+    detecting = false;
   } else {
     createCanvas(640, 480);
     const canvas = document.getElementById('defaultCanvas0');
     canvasContainer.appendChild(canvas);
-    canvas.style.width='400px'
-    canvas.style.height='400px'
+    canvas.style.width = '400px'
+    canvas.style.height = '400px'
     video = createCapture(VIDEO);
     video.size(640, 480);
     video.hide();
@@ -44,7 +43,7 @@ function desactivarVideo() {
   detections = [];
   detectionAction.innerText = 'Detectar Objetos';
   createCanvas(0, 0);
-  const div =  document.querySelector(".vsc-controller");
+  const div = document.querySelector(".vsc-controller");
   div.classList.remove('vsc-controller')
 }
 
@@ -74,16 +73,43 @@ function drawLabel(object) {
   text(object.label, object.x + 15, object.y + 34);
 }
 
+
+var contador = {};
+
 function onDetected(error, results) {
   if (error) {
     console.error(error);
   }
   detections = results;
-
+  if (detecting) {
+    setTimeout(function () { analysisDetects(); }, 1000);
+  }
   if (detecting) {
     detect();
   }
 }
+
+function analysisDetects() {
+  console.log(contador);
+  if (detections.length != 0) {
+    var actual = detections[0].label;
+    if (actual in contador && contador[actual] >= 100) {
+      contador = {};
+    }
+    if (!(actual in contador)) {
+      contador[actual] = 0;
+    }
+    if (contador[actual] = 100) {
+      convertirTextoAVoz('Hay una persona');
+    }
+  }
+  contador[actual]++
+  detections = [];
+  if (detecting) {
+    setTimeout(function () { analysisDetects(); }, 10000);
+  }
+}
+
 
 function detect() {
   detector.detect(video, onDetected);
