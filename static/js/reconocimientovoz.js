@@ -125,7 +125,7 @@ function procesarResultado(resultado) {
             respuesta = 'Estan desactivadas las puertas';
             texto_resultado.textContent = respuesta;
             convertirTextoAVoz(respuesta);
-        } else if (resultado.includes('ventana')) {
+        } else if (resultado.includes('ventana') && manejoVentanas) {
             if (resultado.includes('habitación')) {
                 const numeroHabitacion = extraerNumero(resultado);
                 if (numeroHabitacion) {
@@ -173,10 +173,14 @@ function procesarResultado(resultado) {
             }
             convertirTextoAVoz(respuesta);
             texto_resultado.textContent = respuesta;
+        } else if (resultado.includes('ventana')&& !manejoVentanas){
+            respuesta = 'Estan desactivadas las ventanas';
+            texto_resultado.textContent = respuesta;
+            convertirTextoAVoz(respuesta);
         }
     }
     if (resultado.includes('cerrar')) {
-        if (resultado.includes('puerta')) {
+        if (resultado.includes('puerta') && manejoPuertas) {
             // primero las tres habitaciones
             if (resultado.includes('habitación')) {
                 if (numero) {
@@ -221,7 +225,12 @@ function procesarResultado(resultado) {
                 convertirTextoAVoz(respuesta);
             }
             // revisamos el cerrar ventanas    
-        } else if (resultado.includes('ventana')) {
+        } else if (resultado.includes('puerta') && !manejoPuertas){
+            respuesta = 'Estan desactivadas las puertas';
+            texto_resultado.textContent = respuesta;
+            convertirTextoAVoz(respuesta);
+        } 
+        else if (resultado.includes('ventana')&& manejoVentanas) {
             if (resultado.includes('habitación')) {
                 const numeroHabitacion = extraerNumero(resultado);
                 if (numeroHabitacion) {
@@ -278,11 +287,15 @@ function procesarResultado(resultado) {
                 texto_resultado.textContent = respuesta;
             }
 
+        } else if (resultado.includes('ventana')&& !manejoVentanas){
+            respuesta = 'Estan desactivadas las ventanas';
+            texto_resultado.textContent = respuesta;
+            convertirTextoAVoz(respuesta);
         }
     }
 
-    if (resultado.includes('encender')||resultado.includes('preder')) {
-        if (resultado.includes('luces')||resultado.includes('luz')) {
+    if ((resultado.includes('encender') || resultado.includes('preder'))) {
+        if ((resultado.includes('luces') || resultado.includes('luz'))&& manejoLuces) {
             if (resultado.includes('habitación')) {
                 const numeroHabitacion = extraerNumero(resultado);
                 if (numeroHabitacion) {
@@ -337,11 +350,15 @@ function procesarResultado(resultado) {
             }
             convertirTextoAVoz(respuesta);
             texto_resultado.textContent = respuesta;
+        } else if (resultado.includes('luces')&& !manejoLuces){
+            respuesta = 'Estan desactivadas las luces';
+            texto_resultado.textContent = respuesta;
+            convertirTextoAVoz(respuesta);
         }
     }
 
-    if (resultado.includes('apagar')) {
-        if (resultado.includes('luces')) {
+    if (resultado.includes('apagar') ) {
+        if (resultado.includes('luces')&& manejoLuces) {
             if (resultado.includes('habitación')) {
                 const numeroHabitacion = extraerNumero(resultado);
                 if (numeroHabitacion) {
@@ -401,8 +418,12 @@ function procesarResultado(resultado) {
             }
             convertirTextoAVoz(respuesta);
             texto_resultado.textContent = respuesta;
+        }else if (resultado.includes('luces')&& !manejoLuces){
+            respuesta = 'Estan desactivadas las luces';
+            texto_resultado.textContent = respuesta;
+            convertirTextoAVoz(respuesta);
         }
-    }
+    } 
     texto_resultado.textContent = respuesta;
     convertirTextoAVoz(respuesta);
 }

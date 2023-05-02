@@ -339,9 +339,14 @@
         <div id="canvas-container"></div>
     </div>
 </div>
-
-
 {% endif %}
-
+<script src="{{url_for('static', filename='js/configuraciones.js')}}"></script>
+<script>
+    var interaccionPuertas = '{{interaccionPuertas}}'
+    var interaccionVentanas = '{{interaccionVentanas}}'
+    var interaccionLuces = '{{interaccionLuces}}'
+    var deteccionObjetos = '{{deteccionObjetos}}'
+    asignarVariables(interaccionPuertas,interaccionVentanas,interaccionLuces,deteccionObjetos)
+</script>
 {% endblock %}
 

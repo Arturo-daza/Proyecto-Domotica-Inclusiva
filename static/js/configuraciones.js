@@ -3,7 +3,7 @@ let nombreUsuario;
 let detectarObjetos;
 let manejoPuertas;
 let manejoVentanas;
-let manjeoLuces;
+let manejoLuces;
 
 
 function configuraciones(){
@@ -11,30 +11,21 @@ function configuraciones(){
     detectarObjetos=document.getElementsByName("deteccionObjetos")[0].value;
     manejoPuertas=document.getElementsByName("interaccionPuertas")[0].value;
     manejoVentanas=document.getElementsByName("interaccionVentanas")[0].value;
-    manjeoLuces=document.getElementsByName("interaccionLuces")[0].value;
-    transformarVariable(); 
+    manejoLuces=document.getElementsByName("interaccionLuces")[0].value;
     convertirTextoAVoz("Hola " + nombreUsuario+ " Tus preferencias quedaron guardadas" )
 }
 
-function transformarVariable(){
-    if (detectarObjetos == 0){
-        detectarObjetos = false
-    }else{
-        detectarObjetos = true
+function asignarVariables(interaccionPuertas,interaccionVentanas,interaccionLuces,deteccionObjetos){
+    if (interaccionPuertas == 1){
+        manejoPuertas = true 
     }
-    if (manejoPuertas == 0){
-        manejoPuertas = false
-    }else{
-        manejoPuertas = true
+    if (interaccionVentanas == 1){
+        manejoVentanas = true 
     }
-    if (manejoVentanas == 0){
-        manejoVentanas = false
-    }else{
-        manejoVentanas = true
+    if (interaccionLuces == 1){
+        manejoLuces = true 
     }
-    if (manjeoLuces == 0){
-        manjeoLuces = false
-    }else{
-        manjeoLuces = true
+    if (deteccionObjetos == 1){
+        detectarObjetos = true 
     }
 }
