@@ -50,21 +50,24 @@ function activarReconocimientoDeVoz() {
     reconocimientoDeVoz.onend = function () {
         document.querySelector("button").textContent = "Activar micrófono";
         document.querySelector("button").onclick = function () { activarReconocimientoDeVoz() };
-        procesarResultado(ultimaLinea);
-        cambiarPlano();
+        if(ultimaLinea != ""){
+            procesarResultado(ultimaLinea);
+            cambiarPlano();
+            
+        }
     }
 
     reconocimientoDeVoz.start();
 
-    document.querySelector("button").textContent = "Desactivar micrófono";
-    document.querySelector("button").onclick = function () { desactivarReconocimientoDeVoz() };
+    document.querySelector("button").textContent = "Escuchando ando ...";
+    // document.querySelector("button").onclick = function () { desactivarReconocimientoDeVoz() };
 }
-function desactivarReconocimientoDeVoz() {
-    reconocimientoDeVoz.stop();
-    document.querySelector("button").textContent = "Activar micrófono";
-    document.querySelector("button").onclick = function () { activarReconocimientoDeVoz() };
-    clearTimeout(apagarDespuesDe);
-}
+// function desactivarReconocimientoDeVoz() {
+//     reconocimientoDeVoz.stop();
+//     document.querySelector("button").textContent = "Activar micrófono";
+//     document.querySelector("button").onclick = function () { activarReconocimientoDeVoz() };
+//     clearTimeout(apagarDespuesDe);
+// }
 
 
 function procesarResultado(resultado) {
