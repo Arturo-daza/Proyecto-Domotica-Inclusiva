@@ -191,10 +191,10 @@
 }
 
 .salaComedor {
-    width: 49.8%;
+    width: 50%;
     height: 70%;
     box-sizing: border-box;
-    border-top: 2px solid black; 
+    
     display: inline-block;
     margin-left: -0.5%;
     
