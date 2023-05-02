@@ -30,7 +30,6 @@ const ubicacionesLuz = {
     'lavado': false,
     'salaComedor':true
 }
-
 function activarReconocimientoDeVoz() {
     const reconocimientoDeVoz = new webkitSpeechRecognition();
     reconocimientoDeVoz.lang = "es-ES";
@@ -66,6 +65,7 @@ function desactivarReconocimientoDeVoz() {
     document.querySelector("button").onclick = function () { activarReconocimientoDeVoz() };
     clearTimeout(apagarDespuesDe);
 }
+
 
 function procesarResultado(resultado) {
     resultado = resultado.toLowerCase();
@@ -275,8 +275,8 @@ function procesarResultado(resultado) {
         }
     }
 
-    if (resultado.includes('encender')) {
-        if (resultado.includes('luces')) {
+    if (resultado.includes('encender')||resultado.includes('preder')) {
+        if (resultado.includes('luces')||resultado.includes('luz')) {
             if (resultado.includes('habitación')) {
                 const numeroHabitacion = extraerNumero(resultado);
                 if (numeroHabitacion) {

@@ -18,8 +18,10 @@ function setup() {
   
 }
 function activarVideo() {
+  console.log(detecting);
   if (detecting) {
     toggleDetecting();
+    detecting=false;
   } else {
     createCanvas(640, 480);
     const canvas = document.getElementById('defaultCanvas0');
@@ -37,13 +39,13 @@ function activarVideo() {
 
 function desactivarVideo() {
   detecting = false;
-  video.stop();
+  // video.stop();
   video.remove();
   detections = [];
   detectionAction.innerText = 'Detectar Objetos';
   createCanvas(0, 0);
   const div =  document.querySelector(".vsc-controller");
-  // div.classList.remove('vsc-controller vsc-nosource')
+  div.classList.remove('vsc-controller')
 }
 
 function draw() {
@@ -89,7 +91,7 @@ function detect() {
 
 
 function toggleDetecting() {
-  if (!video || !detector) return;
+  // if (!video || !detector) return;
   if (!detecting) {
     detect();
     detectionAction.innerText = 'Parar...';
