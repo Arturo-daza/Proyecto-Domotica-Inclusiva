@@ -34,3 +34,11 @@ img{
   width: 30%;
 }
 
+:alert {
+  color: white;
+  background-color: red;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  border: 2px solid black;
+}

@@ -22,6 +22,8 @@ function activarVideo() {
     toggleDetecting();
     detecting = false;
   } else {
+    alertShown= false;
+    isFirstDetection = true;
     createCanvas(640, 480);
     const canvas = document.getElementById('defaultCanvas0');
     canvasContainer.appendChild(canvas);
@@ -31,7 +33,7 @@ function activarVideo() {
     video.size(640, 480);
     video.hide();
     video.elt.addEventListener('loadeddata', function () {
-      setTimeout(toggleDetecting, 1000);
+      setTimeout(toggleDetecting, 1);
     });
   }
 }
@@ -74,41 +76,42 @@ function drawLabel(object) {
 }
 
 
-var contador = {};
+let alertShown = false;
+let contador = 0;
+let isFirstDetection = true;
 
 function onDetected(error, results) {
   if (error) {
     console.error(error);
   }
   detections = results;
-  if (detecting) {
-    setTimeout(function () { analysisDetects(); }, 1000);
+  const person = results.find(result => result.label === 'person');
+  if (person && !alertShown && isFirstDetection) {
+    setTimeout(function() {
+      convertirTextoAVoz('Se detectó una persona en la entrada');
+      alert('Se detectó una persona en la entrada!');
+    }, 2000);
+    alertShown = true;
+    contador = 0;
+    isFirstDetection=false;
+  } else if (person && contador >= 100 ) {
+    convertirTextoAVoz('Se detectó una persona en la entrada')
+    contador = 0;
+  } else if (person && alertShown) {
+    contador += 1;
+    console.log(contador);
+  } else {
+    alertShown = false;
+    isFirstDetection=true;
+    contador = 0;
   }
+
   if (detecting) {
     detect();
   }
 }
 
-function analysisDetects() {
-  console.log(contador);
-  if (detections.length != 0) {
-    var actual = detections[0].label;
-    if (actual in contador && contador[actual] >= 100) {
-      contador = {};
-    }
-    if (!(actual in contador)) {
-      contador[actual] = 0;
-    }
-    if (contador[actual] = 100) {
-      convertirTextoAVoz('Hay una persona');
-    }
-  }
-  contador[actual]++
-  detections = [];
-  if (detecting) {
-    setTimeout(function () { analysisDetects(); }, 10000);
-  }
-}
+
 
 
 function detect() {
