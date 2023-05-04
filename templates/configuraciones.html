@@ -130,11 +130,18 @@
         <input class="button-primary mt-3 btn btn-info btn-block bold" type="submit" onclick="configuraciones()" value="Guardar preferencias">
     </form>
     <script>
-        var select = document.getElementById("deteccionObjetos");
+        let usuario= document.getElementsByName("nombreUsuario")[0].value
+        console.log(usuario)
+        function configuraciones(){
+            console.log(usuario)
+            convertirTextoAVoz("Hola " + usuario+ " Tus preferencias quedaron guardadas" )
+        }
+        
+        let select = document.getElementsByName("deteccionObjetos")[0];
         if (select) {
             select.addEventListener("change", function () {
                 console.log(select.value);
-                if (select.value == 0) {
+                if (select.value == 1) {
                     document.getElementById("nueva-categoria-form").style.display = "block";
                 } else {
                     document.getElementById("nueva-categoria-form").style.display = "none";

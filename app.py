@@ -4,16 +4,15 @@ app = Flask(__name__)
 application = app
 
 
-
 @app.route('/')
 def index():
     configuraciones = listaconfiguraciones()
-    context={
-        'nombreUsuario':configuraciones[0]['nombreUsuario'],
-        'interaccionPuertas':configuraciones[0]['interaccionPuertas'],
-        'interaccionVentanas':configuraciones[0]['interaccionVentanas'],
-        'interaccionLuces':configuraciones[0]['interaccionLuces'],
-        'deteccionObjetos':configuraciones[0]['deteccionObjetos']
+    context = {
+        'nombreUsuario': configuraciones[0]['nombreUsuario'],
+        'interaccionPuertas': configuraciones[0]['interaccionPuertas'],
+        'interaccionVentanas': configuraciones[0]['interaccionVentanas'],
+        'interaccionLuces': configuraciones[0]['interaccionLuces'],
+        'deteccionObjetos': configuraciones[0]['deteccionObjetos']
     }
     return render_template('index.html', **context)
 
@@ -26,12 +25,17 @@ def configuraciones():
         interaccionVentanas = int(request.form['interaccionVentanas'])
         interaccionLuces = int(request.form['interaccionLuces'])
         deteccionObjetos = int(request.form['deteccionObjetos'])
-        actualizarConfiguraciones(interaccionPuertas, interaccionVentanas, interaccionLuces, deteccionObjetos, nombreUsuario)
+        actualizarConfiguraciones(interaccionPuertas, interaccionVentanas,
+                                  interaccionLuces, deteccionObjetos, nombreUsuario)
         configuraciones = listaconfiguraciones()
         context = {
-            'configuraciones': configuraciones
+            'nombreUsuario': configuraciones[0]['nombreUsuario'],
+            'interaccionPuertas': configuraciones[0]['interaccionPuertas'],
+            'interaccionVentanas': configuraciones[0]['interaccionVentanas'],
+            'interaccionLuces': configuraciones[0]['interaccionLuces'],
+            'deteccionObjetos': configuraciones[0]['deteccionObjetos']
         }
-        return render_template('configuraciones.html', **context)
+        return redirect(url_for("index"))
     else:
         configuraciones = listaconfiguraciones()
         context = {
