@@ -89,7 +89,19 @@ function onDetected(error, results) {
   if (person && !alertShown && isFirstDetection) {
     setTimeout(function() {
       convertirTextoAVoz('Se detectó una persona en la entrada');
-      alert('Se detectó una persona en la entrada!');
+      Swal.fire({
+        title: 'Detección- Hay una persona en la entrada',
+        width: 600,
+        padding: '3em',
+        color: '#716add',
+        background: '#fff url(/images/trees.png)',
+        backdrop: `
+          rgba(0,0,123,0.4)
+          url("/images/nyan.gif")
+          left top
+          no-repeat
+        `
+      })
     }, 2000);
     alertShown = true;
     contador = 0;
