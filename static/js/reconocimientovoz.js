@@ -10,13 +10,14 @@ function activarReconocimientoDeVoz() {
     reconocimientoDeVoz.interimResults = true;
     reconocimientoDeVoz.maxSilence = tiempoMaximoSilencio;
     const texto = document.getElementById("mostrar");
+    texto.textContent = resultado;
     let ultimaLinea = "";
 
     reconocimientoDeVoz.onresult = function (event) {
         const resultados = event.results;
         for (let i = event.resultIndex; i < resultados.length; i++) {
             const resultado = resultados[i][0].transcript;
-            texto.textContent = resultado;
+            
             ultimaLinea = resultado;
         }
     };

@@ -91,7 +91,6 @@
                     {% for data in [{'valor':'Desactivado', 'n':0}, {'valor':'Activado', 'n':1}] %}
                     <option value="{{ data.n }}"> {{ data.valor }}</option>
                     {% endfor %}
-                    <option value=1> ---</option>
                   </select>
             </div>
         </div>
@@ -142,9 +141,9 @@
             select.addEventListener("change", function () {
                 console.log(select.value);
                 if (select.value == 1) {
-                    document.getElementById("nueva-categoria-form").style.display = "block";
+                   // document.getElementById("nueva-categoria-form").style.display = "block";
                 } else {
-                    document.getElementById("nueva-categoria-form").style.display = "none";
+                    //document.getElementById("nueva-categoria-form").style.display = "none";
                 }
             });
         }
