@@ -1,15 +1,16 @@
 // Declara el número del pin donde está conectado el LED
-int luzHab1 = 1;
-int luzHab2 = 2;
-int luzHab3 = 3;
-int puertaHab1 = 4;
-int puertaHab2 = 5;
-int puertaHab3  = 6;
-int ventanaHab1 = 7;
-int ventanaHab2 = 8;
-int ventanaHab3 = 9;
-int ventiladorHab1 = 10;
-int ventiladorHab2 = 11;
+#include <Servo.h>
+Servo myservo1;
+Servo myservo2;
+int luzHab1 = 2;
+int luzHab2 = 3;
+int luzHab3 = 4;
+int puertaHab1 = 11;
+int ventanaHab1 = 12;
+int ventanaHab2 = 7;
+int ventanaHab3 = 8;
+int ventiladorHab1 = 9;
+int ventiladorHab2 = 10;
 
 
 
@@ -18,12 +19,13 @@ char option;
 
 void setup() {
   // Configura el pin como salida
+  myservo1.attach(5);
+  myservo2.attach(12);
   pinMode(luzHab1, OUTPUT);
   pinMode(luzHab2, OUTPUT);
   pinMode(luzHab3, OUTPUT);
-  pinMode(puertaHab1, OUTPUT);
-  pinMode(puertaHab2, OUTPUT);
-  pinMode(puertaHab3, OUTPUT);
+ 
+  
   pinMode(ventanaHab1, OUTPUT);
   pinMode(ventanaHab2, OUTPUT);
   pinMode(ventanaHab3, OUTPUT);
@@ -34,132 +36,128 @@ void setup() {
 }
 
 void loop() {
+  
   int sensorApuerta1 = analogRead(A1);
-  int sensorApuerta2 = analogRead(A2);
-  int sensorBpuerta1 = analogRead(A3);
-  int sensorBpuerta2 = analogRead(A4);
-  int valor_analogico = analogRead(A0);
-  Serial.println(sensorApuerta1);
-  if (sensorApuerta1 > 1000 ) {
+
+  int sensorBpuerta1 = analogRead(A2);
+    if (sensorApuerta1 < 200 && sensorBpuerta1 < 200 ) {
+    Serial.println("Revisar Sensores, Posible mal estado");
+      delay(300);
+  }
+
+  
+  if (sensorApuerta1 < 200 && sensorBpuerta1 >200 ) {
     Serial.println("Puerta Habitacion 1 Abierta");
+    delay(300);
   }
 
-  if (sensorBpuerta1 > 800 and sensorApuerta1 < 400) {
+
+  if (sensorBpuerta1 < 200 && sensorApuerta1 > 200  ) {
     Serial.println("Puerta Habitacion 1 Cerrada");
+      delay(300);
   }
 
-  if (sensorApuerta2 > 800 and sensorBpuerta2 < 400) {
-    Serial.println("Puerta Habitacion 2 Abierta");
-  }
+ 
 
-  if (sensorBpuerta2 > 800 and sensorApuerta2 < 400) {
-    Serial.println("Puerta Habitacion 2 Abierta");
-    delay(400);
-  }
-
+ 
   if (Serial.available() > 0) {
     option = Serial.read();
 
     switch (option) {
       //1
       case 'q':
-        pinMode(luzHab1, HIGH);
-        Serial.println("Baño Social Luz encendida");
+        digitalWrite(luzHab1, HIGH);
+        Serial.println("Habitacion 1 Luz encendida");
         break;
       case 'w':
-        pinMode(luzHab1, LOW);
-        Serial.println("Baño Social Luz apagada");
+        digitalWrite(luzHab1, LOW);
+        Serial.println("Habitacion 1 Luz apagada");
         break;
       //2
       case 'e':
-        pinMode(luzHab2, HIGH);
-        Serial.println("Baño Social Luz encendida");
+        digitalWrite(luzHab2, HIGH);
+        Serial.println("Habitacion 2 Luz encendida");
         break;
       case 'r':
-        pinMode(luzHab2, LOW);
-        Serial.println("Baño Social Luz apagada");
+        digitalWrite(luzHab2, LOW);
+        Serial.println("Habitacion 2 Luz apagada");
         break;
       case 't':
         //3
-        pinMode(luzHab3, HIGH);
-        Serial.println("Baño Social Luz encendida");
+        digitalWrite(luzHab3, HIGH);
+        Serial.println("Habitacion 3 Luz encendida");
         break;
       case 'y':
-        pinMode(luzHab3, LOW);
-        Serial.println("Baño Social Luz apagada");
+        digitalWrite(luzHab3, LOW);
+        Serial.println("Habitacion 3 Luz apagada");
         break;
       //4
       case 'u':
-        pinMode(puertaHab1, HIGH);
+        digitalWrite(puertaHab1, HIGH);
         Serial.println("Baño Social Luz encendida");
         break;
       case 'i':
-        pinMode(puertaHab1, LOW);
+        digitalWrite(puertaHab1, LOW);
         Serial.println("Baño Social Luz apagada");
         break;
 
       //5
       case 'o':
-        pinMode(puertaHab2, HIGH);
+         myservo1.write(90);       // mueve el servo hacia la posición 90 grados
+         delay(300);  
         Serial.println("Baño Social Luz encendida");
         break;
       case 'p':
-        pinMode(puertaHab2, LOW);
+        myservo1.write(0);       // mueve el servo hacia la posición 90 grados
+        delay(300);  
         Serial.println("Baño Social Luz apagada");
         break;
-      //6
-      case 'a':
-        pinMode(puertaHab3, HIGH);
-        Serial.println("Baño Social Luz encendida");
-        break;
-      case 's':
-        pinMode(puertaHab3, LOW);
-        Serial.println("Baño Social Luz apagada");
-        break;
+     
+        
       //7
       case 'd':
-        pinMode(ventanaHab1, HIGH);
+        digitalWrite(ventanaHab1, HIGH);
         Serial.println("Baño Social Luz encendida");
         break;
       case 'f':
-        pinMode(ventanaHab1, LOW);
+        digitalWrite(ventanaHab1, LOW);
         Serial.println("Baño Social Luz apagada");
         break;
       //8
       case 'g':
-        pinMode(ventanaHab2, HIGH);
+        digitalWrite(ventanaHab2, HIGH);
         Serial.println("Baño Social Luz encendida");
         break;
       case 'h':
-        pinMode(ventanaHab2, LOW);
+        digitalWrite(ventanaHab2, LOW);
         Serial.println("Baño Social Luz apagada");
         break;
       //9
       case 'j':
-        pinMode(ventanaHab3, HIGH);
+        digitalWrite(ventanaHab3, HIGH);
         Serial.println("Baño Social Luz encendida");
         break;
       case 'k':
-        pinMode(ventanaHab3, LOW);
+        digitalWrite(ventanaHab3, LOW);
         Serial.println("Baño Social Luz apagada");
         break;
       //10
       case 'l':
-        pinMode(ventiladorHab1, HIGH);
+        digitalWrite(ventiladorHab1, HIGH);
         Serial.println("Baño Social Luz encendida");
         break;
 
       case 'z':
-        pinMode(ventiladorHab1, LOW);
+        digitalWrite(ventiladorHab1, LOW);
         Serial.println("Baño Social Luz apagada");
         break;
       case 'x':
         //11
-        pinMode(ventiladorHab2, HIGH);
+        digitalWrite(ventiladorHab2, HIGH);
         Serial.println("Baño Social Luz encendida");
         break;
       case 'c':
-        pinMode(ventiladorHab2, LOW);
+        digitalWrite(ventiladorHab2, LOW);
         Serial.println("Baño Social Luz apagada");
         break;
 
