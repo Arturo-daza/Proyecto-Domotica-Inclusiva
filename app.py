@@ -7,6 +7,29 @@ application = app
 @app.route('/')
 def index():
     configuraciones = listaconfiguraciones()
+    lugaresPlano = listaLugares()
+    context = {
+        'nombreUsuario': configuraciones[0]['nombreUsuario'],
+        'interaccionPuertas': configuraciones[0]['interaccionPuertas'],
+        'interaccionVentanas': configuraciones[0]['interaccionVentanas'],
+        'interaccionLuces': configuraciones[0]['interaccionLuces'],
+        'deteccionObjetos': configuraciones[0]['deteccionObjetos'],
+
+        'habitacion1': lugaresPlano[0]['habitacion1'],
+        'habitacion2': lugaresPlano[0]['habitacion2'],
+        'habitacion3': lugaresPlano[0]['habitacion3'],
+        'bañoPrivado': lugaresPlano[0]['bañoPrivado'],
+        'bañoSocial': lugaresPlano[0]['bañoSocial'],
+        'salaComedor': lugaresPlano[0]['salaComedor'],
+        'lavado': lugaresPlano[0]['lavado'],
+        'cocina': lugaresPlano[0]['cocina'],
+    }
+    return render_template('index.html', **context)
+
+
+@app.route('/configuraciones', methods=['GET', 'POST'])
+def configuraciones():
+    configuraciones = listaconfiguraciones()
     context = {
         'nombreUsuario': configuraciones[0]['nombreUsuario'],
         'interaccionPuertas': configuraciones[0]['interaccionPuertas'],
@@ -14,11 +37,6 @@ def index():
         'interaccionLuces': configuraciones[0]['interaccionLuces'],
         'deteccionObjetos': configuraciones[0]['deteccionObjetos']
     }
-    return render_template('index.html', **context)
-
-
-@app.route('/configuraciones', methods=['GET', 'POST'])
-def configuraciones():
     if request.method == 'POST':
         nombreUsuario = request.form['nombreUsuario']
         interaccionPuertas = int(request.form['interaccionPuertas'])
@@ -27,14 +45,7 @@ def configuraciones():
         deteccionObjetos = int(request.form['deteccionObjetos'])
         actualizarConfiguraciones(interaccionPuertas, interaccionVentanas,
                                   interaccionLuces, deteccionObjetos, nombreUsuario)
-        configuraciones = listaconfiguraciones()
-        context = {
-            'nombreUsuario': configuraciones[0]['nombreUsuario'],
-            'interaccionPuertas': configuraciones[0]['interaccionPuertas'],
-            'interaccionVentanas': configuraciones[0]['interaccionVentanas'],
-            'interaccionLuces': configuraciones[0]['interaccionLuces'],
-            'deteccionObjetos': configuraciones[0]['deteccionObjetos']
-        }
+
         return redirect(url_for("index"))
     else:
         configuraciones = listaconfiguraciones()
@@ -42,6 +53,37 @@ def configuraciones():
             'configuraciones': configuraciones
         }
         return render_template('configuraciones.html', **context)
+
+
+@app.route('/lugares', methods=['GET', 'POST'])
+def lugares():
+    lugaresPlano = listaLugares()
+    print(lugaresPlano)
+    context = {
+        'habitacion1': lugaresPlano[0]['habitacion1'],
+        'habitacion2': lugaresPlano[0]['habitacion2'],
+        'habitacion3': lugaresPlano[0]['habitacion3'],
+        'bañoPrivado': lugaresPlano[0]['bañoPrivado'],
+        'bañoSocial': lugaresPlano[0]['bañoSocial'],
+        'salaComedor': lugaresPlano[0]['salaComedor'],
+        'lavado': lugaresPlano[0]['lavado'],
+        'cocina': lugaresPlano[0]['cocina'],
+    }
+
+    if request.method == 'POST':
+        habitacion1 = request.form['habitacion1']
+        habitacion2 = request.form['habitacion2']
+        habitacion3 = request.form['habitacion3']
+        bañoPrivado = request.form['bañoPrivado']
+        bañoSocial = request.form['bañoSocial']
+        salaComedor = request.form['salaComedor']
+        lavado = request.form['lavado']
+        cocina = request.form['cocina']
+        actualizarLugares(habitacion1, habitacion2, habitacion3,
+                          bañoPrivado, bañoSocial, salaComedor, lavado, cocina)
+        return redirect(url_for("index"))
+    else:
+        return render_template('lugares.html', **context)
 
 
 if __name__ == "__main__":

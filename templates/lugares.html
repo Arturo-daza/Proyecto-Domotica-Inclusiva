@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<h1 class="mt-2">CONFIGURACIONES</h1>
+<section style="width:70% !important">
+    <h2 class="mt-2">
+        <a href="{{url_for('index')}}" class="left" title="Volver"><i class="bi bi-arrow-left-circle"></i></a>
+        GENERALES
+        <hr>
+    </h2>
+    <form action="{{ url_for('lugares') }}" method="POST" class="mb-3" autocomplete="off">
+        <div class="row">
+            <div class="col">
+                <label for="habitacion1">Habitación 1 </label>
+                <input type="text" name="habitacion1" class="form-control" value="{{habitacion1}}" required>
+            </div>
+            <div class="col">
+                <label for="habitacion2">Habitación 2</label>
+                <input type="text" name="habitacion2" class="form-control" value="{{habitacion2}}" required>
+            </div>
+            <div class="col">
+                <label for="habitacion3">Habitación 3</label>
+                <input type="text" name="habitacion3" class="form-control" value="{{habitacion3}}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="bañoSocial">Baño social </label>
+                <input type="text" name="bañoSocial" class="form-control" value="{{bañoSocial}}" required>
+            </div>
+            <div class="col">
+                <label for="bañoPrivado">Baño Privado </label>
+                <input type="text" name="bañoPrivado" class="form-control" value="{{bañoPrivado}}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="salaComedor">Sala y/o comedor </label>
+                <input type="text" name="salaComedor" class="form-control" value="{{salaComedor}}" required>
+            </div>
+            <div class="col">
+                <label for="cocina"> Cocina </label>
+                <input type="text" name="cocina" class="form-control" value="{{cocina}}" required>
+            </div>
+            <div class="col">
+                <label for="lavado"> Zona de lavado </label>
+                <input type="text" name="lavado" class="form-control" value="{{lavado}}" required>
+            </div>
+        </div>
+
+        <hr>
+
+        <input class="button-primary mt-3 btn btn-info btn-block bold" type="submit" onclick="configuraciones()"
+            value="Guardar preferencias">
+    </form>
+
+</section>
+
+{% endblock body %}
