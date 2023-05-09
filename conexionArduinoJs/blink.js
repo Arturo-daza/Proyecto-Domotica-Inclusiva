@@ -1,7 +1,8 @@
-var five = require("johnny-five");
-var board = new five.Board();
+const five = require('johnny-five');
 
-board.on("ready", function() {
-  var led = new five.Led(2);
-  led.blink(500);
+const board = new five.Board();
+
+board.on('ready', () => {
+  console.log('Board is ready!');
+  // Now you can interact with the board using Johnny-Five APIs
 });
