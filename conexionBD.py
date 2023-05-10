@@ -25,7 +25,6 @@ def connectionBD():
     #     port= "5821"
     #     )
     if mydb:
-        print ("Conexion exitosa a BD")
         return mydb
     else:
         print("Error en la conexion a BD")

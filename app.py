@@ -29,30 +29,35 @@ def index():
 
 @app.route('/configuraciones', methods=['GET', 'POST'])
 def configuraciones():
+    # configuraciones = listaconfiguraciones()
+    # context = {
+    #     'nombreUsuario': configuraciones[0]['nombreUsuario'],
+    #     'interaccionPuertas': configuraciones[0]['interaccionPuertas'],
+    #     'interaccionVentanas': configuraciones[0]['interaccionVentanas'],
+    #     'interaccionLuces': configuraciones[0]['interaccionLuces'],
+    #     'deteccionObjetos': configuraciones[0]['deteccionObjetos']
+    # }
+
     configuraciones = listaconfiguraciones()
     context = {
-        'nombreUsuario': configuraciones[0]['nombreUsuario'],
-        'interaccionPuertas': configuraciones[0]['interaccionPuertas'],
-        'interaccionVentanas': configuraciones[0]['interaccionVentanas'],
-        'interaccionLuces': configuraciones[0]['interaccionLuces'],
-        'deteccionObjetos': configuraciones[0]['deteccionObjetos']
+        'configuraciones': configuraciones
     }
+    return render_template('configuraciones.html', **context)
+
+
+@app.route('/configuracionesUpdate', methods=['POST'])
+def configuracionesUpdate():
     if request.method == 'POST':
         nombreUsuario = request.form['nombreUsuario']
         interaccionPuertas = int(request.form['interaccionPuertas'])
         interaccionVentanas = int(request.form['interaccionVentanas'])
         interaccionLuces = int(request.form['interaccionLuces'])
         deteccionObjetos = int(request.form['deteccionObjetos'])
+        # deteccionObjetos = int(request.form['check'])
         actualizarConfiguraciones(interaccionPuertas, interaccionVentanas,
                                   interaccionLuces, deteccionObjetos, nombreUsuario)
 
         return redirect(url_for("index"))
-    else:
-        configuraciones = listaconfiguraciones()
-        context = {
-            'configuraciones': configuraciones
-        }
-        return render_template('configuraciones.html', **context)
 
 
 @app.route('/lugares', methods=['GET', 'POST'])
