@@ -46,7 +46,10 @@
         
         {% endblock %}
     </div>
+    {% if deteccionObjetos == 1 %}  
     <script src="{{url_for('static', filename='js/detectarObjetos.js')}}"></script>
+    {% endif %}
+    
 </body>
 
 </html>

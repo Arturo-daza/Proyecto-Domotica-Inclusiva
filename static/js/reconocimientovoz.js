@@ -45,427 +45,548 @@ function activarReconocimientoDeVoz() {
 
 function procesarResultado(resultado) {
     resultado = resultado.toLowerCase();
-    const numero = extraerNumero(resultado);
+    // const numero = extraerNumero(resultado);
     const texto_resultado = document.getElementById("resulado");
     var respuesta = "No se reconoce el comando";
     // Codigo abrir puerta
-    if (resultado.includes('abrir')) {
-        if (resultado.includes('puerta') && manejoPuertas) {
-            if (resultado.includes(habitacion1)) {
-                if (ubicacionesPuerta[habitacion1] === false) {
-                    ubicacionesPuerta[habitacion1] = true;
-                    respuesta = `Abriendo puerta ${habitacion1}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La puerta del ${habitacion1} ya está abierta.`
-                }
-            } else if (resultado.includes(habitacion2)) {
-                if (ubicacionesPuerta[habitacion2] === false) {
-                    ubicacionesPuerta[habitacion2] = true;
-                    respuesta = `Abriendo puerta ${habitacion2}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La puerta del ${habitacion2} ya está abierta.`
-                }
-
-            } else if (resultado.includes(habitacion3)) {
-                if (ubicacionesPuerta[habitacion3] === false) {
-                    ubicacionesPuerta[habitacion3] = true;
-                    respuesta = `Abriendo puerta ${habitacion3}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La puerta del ${habitacion3} ya está abierta.`
-                }
-            }
-
-            else if (resultado.includes(bañoSocial)) {
-                if (ubicacionesPuerta[bañoSocial] === false) {
-                    ubicacionesPuerta[bañoSocial] = true;
-                    respuesta = `Abriendo puerta ${bañoSocial}.`
-                } else {
-                    respuesta = `La puerta del ${bañoSocial} ya está abierta.`
-                }
-            }
-            else if (resultado.includes(bañoPrivado)) {
-                if (ubicacionesPuerta[bañoPrivado] === false) {
-                    ubicacionesPuerta[bañoPrivado] = true;
-                    respuesta = `Abriendo puerta ${bañoPrivado}.`
-                } else {
-                    respuesta = `La puerta del ${bañoPrivado} ya está abierta.`
-                }
-
-                texto_resultado.textContent = respuesta;
-                convertirTextoAVoz(respuesta);
-            }
-        } else if (resultado.includes('puerta') && !manejoPuertas) {
-            respuesta = 'Estan desactivadas las puertas';
-            texto_resultado.textContent = respuesta;
-            convertirTextoAVoz(respuesta);
-
-
-        } else if (resultado.includes('ventana') && manejoVentanas) {
-            if (resultado.includes(habitacion1)) {
-                if (ubicacionesVentana[habitacion1] === false) {
-                    ubicacionesVentana[habitacion1] = true;
-                    respuesta = `Abriendo ventana ${habitacion1}.`
-
-                } else {
-                    respuesta = `La ventana del ${habitacion1} ya está abierta.`
-                }
-            } else if (resultado.includes(habitacion2)) {
-                if (ubicacionesVentana[habitacion2] === false) {
-                    ubicacionesVentana[habitacion2] = true;
-                    respuesta = `Abriendo ventana ${habitacion2}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La ventana del ${habitacion2} ya está abierta.`
-                }
-
-            } else if (resultado.includes(habitacion3)) {
-                if (ubicacionesVentana[habitacion3] === false) {
-                    ubicacionesVentana[habitacion3] = true;
-                    respuesta = `Abriendo ventana ${habitacion3}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La ventana del ${habitacion3} ya está abierta.`
-                }
-            }
-
-            else if (resultado.includes(bañoSocial)) {
-                if (ubicacionesVentana[bañoSocial] === false) {
-                    ubicacionesVentana[bañoSocial] = true;
-                    respuesta = `Abriendo ventana ${bañoSocial}.`
-                } else {
-                    respuesta = `La ventana del ${bañoSocial} ya está abierta.`
-                }
-            }
-            else if (resultado.includes(bañoPrivado)) {
-                if (ubicacionesVentana[bañoPrivado] === false) {
-                    ubicacionesVentana[bañoPrivado] = true;
-                    respuesta = `Abriendo ventana ${bañoPrivado}.`
-                } else {
-                    respuesta = `La ventana del ${bañoPrivado} ya está abierta.`
-                }
-            } else if (resultado.includes(cocina)) {
-                if (ubicacionesVentana[cocina] === false) {
-                    ubicacionesVentana[cocina] = true;
-                    respuesta = `Abriendo ventana ${cocina}.`
-                } else {
-                    respuesta = `La ventana del ${cocina} ya está abierta.`
-                }
-            } else if (resultado.includes(lavado)) {
-                if (ubicacionesVentana[lavado] === false) {
-                    ubicacionesVentana[lavado] = true;
-                    respuesta = `Abriendo ventana ${lavado}.`
-                } else {
-                    respuesta = `La ventana del ${lavado} ya está abierta.`
-                }
-            } else if (resultado.includes(salaComedor)) {
-                if (ubicacionesVentana[salaComedor] === false) {
-                    ubicacionesVentana[salaComedor] = true;
-                    respuesta = `Abriendo ventana ${salaComedor}.`
-                } else {
-                    respuesta = `La ventana del ${salaComedor} ya está abierta.`
-                }
-            }
-            else {
-                respuesta = 'No se especifica cual ventana abrir.';
-            }
-            convertirTextoAVoz(respuesta);
-            texto_resultado.textContent = respuesta;
-        } else if (resultado.includes('ventana') && !manejoVentanas) {
-            respuesta = 'Estan desactivadas las ventanas';
-            texto_resultado.textContent = respuesta;
-            convertirTextoAVoz(respuesta);
-        }
-    }
-    if (resultado.includes('cerrar')) {
-        if (resultado.includes('puerta') && manejoPuertas) {
-            // primero las tres habitaciones
-            if (resultado.includes(habitacion1)) {
-                if (ubicacionesPuerta[habitacion1] === true) {
-                    ubicacionesPuerta[habitacion1] = false;
-                    respuesta = `Cerrando puerta ${habitacion1}.`
-                } else {
-                    respuesta = `La puerta del ${habitacion1} ya está cerrada.`
-                }
-            } else if (resultado.includes(habitacion2)) {
-                if (ubicacionesPuerta[habitacion2] === true) {
-                    ubicacionesPuerta[habitacion2] = false;
-                    respuesta = `Cerrando puerta ${habitacion2}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La puerta del ${habitacion2} ya está cerrada.`
-                }
-
-            } else if (resultado.includes(habitacion3)) {
-                if (ubicacionesPuerta[habitacion3] === true) {
-                    ubicacionesPuerta[habitacion3] = false;
-                    respuesta = `Cerrando puerta ${habitacion3}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La puerta del ${habitacion3} ya está cerrada.`
-                }
-            }
-
-            else if (resultado.includes(bañoSocial)) {
-                if (ubicacionesPuerta[bañoSocial] === true) {
-                    ubicacionesPuerta[bañoSocial] = false;
-                    respuesta = `Cerrando puerta ${bañoSocial}.`
-                } else {
-                    respuesta = `La puerta del ${bañoSocial} ya está cerrada.`
-                }
-            }
-            else if (resultado.includes(bañoPrivado)) {
-                if (ubicacionesPuerta[bañoPrivado] === true) {
-                    ubicacionesPuerta[bañoPrivado] = false;
-                    respuesta = `Cerrando puerta ${bañoPrivado}.`
-                } else {
-                    respuesta = `La puerta del ${bañoPrivado} ya está cerrada.`
-                }
-
-                texto_resultado.textContent = respuesta;
-                convertirTextoAVoz(respuesta);
-            }
-
-        } else if (resultado.includes('puerta') && !manejoPuertas) {
-            respuesta = 'Estan desactivadas las puertas';
-            texto_resultado.textContent = respuesta;
-            convertirTextoAVoz(respuesta);
-        }
-        else if (resultado.includes('ventana') && manejoVentanas) {
-            if (resultado.includes(habitacion1)) {
-                if (ubicacionesVentana[habitacion1] === true) {
-                    ubicacionesVentana[habitacion1] = false;
-                    respuesta = `Cerrando ventana ${habitacion1}.`
-
-                } else {
-                    respuesta = `La ventana del ${habitacion1} ya está cerrada.`
-                }
-            } else if (resultado.includes(habitacion2)) {
-                if (ubicacionesVentana[habitacion2] === true) {
-                    ubicacionesVentana[habitacion2] = false;
-                    respuesta = `Cerrando ventana ${habitacion2}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La ventana del ${habitacion2} ya está cerrada.`
-                }
-
-            } else if (resultado.includes(habitacion3)) {
-                if (ubicacionesVentana[habitacion3] === true) {
-                    ubicacionesVentana[habitacion3] = false;
-                    respuesta = `Cerrando ventana ${habitacion3}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La ventana del ${habitacion3} ya está cerrada.`
-                }
-            }
-
-            else if (resultado.includes(bañoSocial)) {
-                if (ubicacionesVentana[bañoSocial] === true) {
-                    ubicacionesVentana[bañoSocial] = false;
-                    respuesta = `Cerrando ventana ${bañoSocial}.`
-                } else {
-                    respuesta = `La ventana del ${bañoSocial} ya está cerrada.`
-                }
-            }
-            else if (resultado.includes(bañoPrivado)) {
-                if (ubicacionesVentana[bañoPrivado] === true) {
-                    ubicacionesVentana[bañoPrivado] = false;
-                    respuesta = `Cerrando ventana ${bañoPrivado}.`
-                } else {
-                    respuesta = `La ventana del ${bañoPrivado} ya está cerrada.`
-                }
-            } else if (resultado.includes(cocina)) {
-                if (ubicacionesVentana[cocina] === true) {
-                    ubicacionesVentana[cocina] = false;
-                    respuesta = `Cerrando ventana ${cocina}.`
-                } else {
-                    respuesta = `La ventana del ${cocina} ya está cerrada.`
-                }
-            } else if (resultado.includes(lavado)) {
-                if (ubicacionesVentana[lavado] === true) {
-                    ubicacionesVentana[lavado] = false;
-                    respuesta = `Cerrando ventana ${lavado}.`
-                } else {
-                    respuesta = `La ventana del ${lavado} ya está cerrada.`
-                }
-            } else if (resultado.includes(salaComedor)) {
-                if (ubicacionesVentana[salaComedor] === true) {
-                    ubicacionesVentana[salaComedor] = false;
-                    respuesta = `Cerrando ventana ${salaComedor}.`
-                } else {
-                    respuesta = `La ventana del ${salaComedor} ya está cerrada.`
-                }
+    if (resultado.includes('puerta')) {
+        if (manejoPuertas) {
+            const habitacion = Object.keys(ubicacionesPuerta).find(h => resultado.includes(h));
+            if  (resultado.includes('cerrar')) {
+                respuesta="";
+                for (let habitacion in ubicacionesPuerta) {
+                    if (ubicacionesPuerta[habitacion] === true) {
+                        ubicacionesPuerta[habitacion] = false;
+                        respuesta += `\n Cerrando puerta ${habitacion}. `;
+                    }
+                } 
+                respuesta += 'Todas las puertas ya estan cerradas'
+            } else if (habitacion) {
+                ubicacionesPuerta[habitacion] = !ubicacionesPuerta[habitacion];
+                respuesta = ubicacionesPuerta[habitacion] ? `Abriendo puerta ${habitacion}.` : `Cerrando puerta ${habitacion}.`;
             } else {
-                respuesta = 'No se especifica cual ventana cerrar';
-                convertirTextoAVoz(respuesta);
-                texto_resultado.textContent = respuesta;
+                respuesta = 'No se reconoce la habitación indicada.';
             }
+        } else {
+            respuesta = 'Estan desactivadas las puertas';
+        }
+    }
+    
 
-        } else if (resultado.includes('ventana') && !manejoVentanas) {
+    if (resultado.includes('ventana')) {
+        if (manejoVentanas) {
+            const habitacion = Object.keys(ubicacionesVentana).find(h => resultado.includes(h));
+            if (habitacion) {
+                ubicacionesVentana[habitacion] = !ubicacionesVentana[habitacion];
+                respuesta = ubicacionesVentana[habitacion] ? `Abriendo ventana ${habitacion}.` : `Cerrando ventana ${habitacion}.`;
+            } else {
+                respuesta = 'No se reconoce la habitación indicada.';
+            }
+        } else {
             respuesta = 'Estan desactivadas las ventanas';
-            texto_resultado.textContent = respuesta;
-            convertirTextoAVoz(respuesta);
         }
     }
-
-    if ((resultado.includes('encender') || resultado.includes('preder'))) {
-        if ((resultado.includes('luces') || resultado.includes('luz')) && manejoLuces) {
-            if (resultado.includes(habitacion1)) {
-                if (ubicacionesLuz[habitacion1] === false) {
-                    ubicacionesLuz[habitacion1] = true;
-                    respuesta = `Encendiendo luz ${habitacion1}.`
-
-                } else {
-                    respuesta = `La luz del ${habitacion1} ya está encendida.`
-                }
-            } else if (resultado.includes(habitacion2)) {
-                if (ubicacionesLuz[habitacion2] === false) {
-                    ubicacionesLuz[habitacion2] = true;
-                    respuesta = `Encendiendo luz ${habitacion2}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La luz del ${habitacion2} ya está encendida.`
-                }
-
-            } else if (resultado.includes(habitacion3)) {
-                if (ubicacionesLuz[habitacion3] === false) {
-                    ubicacionesLuz[habitacion3] = true;
-                    respuesta = `Encendiendo luz ${habitacion3}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La luz del ${habitacion3} ya está encendida.`
-                }
-            }
-
-            else if (resultado.includes(bañoSocial)) {
-                if (ubicacionesLuz[bañoSocial] === false) {
-                    ubicacionesLuz[bañoSocial] = true;
-                    respuesta = `Encendiendo luz ${bañoSocial}.`
-                } else {
-                    respuesta = `La luz del ${bañoSocial} ya está encendida.`
-                }
-            }
-            else if (resultado.includes(bañoPrivado)) {
-                if (ubicacionesLuz[bañoPrivado] === false) {
-                    ubicacionesLuz[bañoPrivado] = true;
-                    respuesta = `Encendiendo luz ${bañoPrivado}.`
-                } else {
-                    respuesta = `La luz del ${bañoPrivado} ya está encendida.`
-                }
-            } else if (resultado.includes(cocina)) {
-                if (ubicacionesLuz[cocina] === false) {
-                    ubicacionesLuz[cocina] = true;
-                    respuesta = `Encendiendo luz ${cocina}.`
-                } else {
-                    respuesta = `La luz del ${cocina} ya está encendida.`
-                }
-            } else if (resultado.includes(lavado)) {
-                if (ubicacionesLuz[lavado] === false) {
-                    ubicacionesLuz[lavado] = true;
-                    respuesta = `Encendiendo luz ${lavado}.`
-                } else {
-                    respuesta = `La luz del ${lavado} ya está encendida.`
-                }
-            } else if (resultado.includes(salaComedor)) {
-                if (ubicacionesLuz[salaComedor] === false) {
-                    ubicacionesLuz[salaComedor] = true;
-                    respuesta = `Encendiendo luz ${salaComedor}.`
-                } else {
-                    respuesta = `La luz del ${salaComedor} ya está encendida.`
-                }
-            } else if (resultado.includes('luces') && !manejoLuces) {
-                respuesta = 'Estan desactivadas las luces';
+    if (resultado.includes('cerrar todas las ventanas')) {
+        for (let habitacion in ubicacionesVentana) {
+            if (ubicacionesVentana[habitacion] === true) {
+                ubicacionesVentana[habitacion] = false;
+                respuesta += `Cerrando ventana ${habitacion}. `;
             }
         }
     }
 
-    if (resultado.includes('apagar')) {
-        if ((resultado.includes('luces')||resultado.includes('luz')) && manejoLuces) {
-            if (resultado.includes(habitacion1)) {
-                if (ubicacionesLuz[habitacion1] === true) {
-                    ubicacionesLuz[habitacion1] = false;
-                    respuesta = `Apagando luz ${habitacion1}.`
 
-                } else {
-                    respuesta = `La luz del ${habitacion1} ya está apagada.`
-                }
-            } else if (resultado.includes(habitacion2)) {
-                if (ubicacionesLuz[habitacion2] === true) {
-                    ubicacionesLuz[habitacion2] = false;
-                    respuesta = `Apagando luz ${habitacion2}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La luz del ${habitacion2} ya está apagada.`
-                }
-
-            } else if (resultado.includes(habitacion3)) {
-                if (ubicacionesLuz[habitacion3] === true) {
-                    ubicacionesLuz[habitacion3] = false;
-                    respuesta = `Apagando luz ${habitacion3}.`
-                    texto_resultado.textContent = respuesta;
-                    convertirTextoAVoz(respuesta);
-                } else {
-                    respuesta = `La luz del ${habitacion3} ya está apagada.`
-                }
+    if (resultado.includes('luz')|| resultado.includes('luces')) {
+        if (manejoLuces) {
+            const habitacion = Object.keys(ubicacionesLuz).find(h => resultado.includes(h));
+            if (habitacion) {
+                ubicacionesLuz[habitacion] = !ubicacionesLuz[habitacion];
+                respuesta = ubicacionesLuz[habitacion] ? `Prendiendo Luz ${habitacion}.` : `Apagando Luz ${habitacion}.`;
+            } else {
+                respuesta = 'No se reconoce la habitación indicada.';
             }
-
-            else if (resultado.includes(bañoSocial)) {
-                if (ubicacionesLuz[bañoSocial] === true) {
-                    ubicacionesLuz[bañoSocial] = false;
-                    respuesta = `Apagando luz ${bañoSocial}.`
-                } else {
-                    respuesta = `La luz del ${bañoSocial} ya está apagada.`
-                }
-            }
-            else if (resultado.includes(bañoPrivado)) {
-                if (ubicacionesLuz[bañoPrivado] === true) {
-                    ubicacionesLuz[bañoPrivado] = false;
-                    respuesta = `Apagando luz ${bañoPrivado}.`
-                } else {
-                    respuesta = `La luz del ${bañoPrivado} ya está apagada.`
-                }
-            } else if (resultado.includes(cocina)) {
-                if (ubicacionesLuz[cocina] === true) {
-                    ubicacionesLuz[cocina] = false;
-                    respuesta = `Apagando luz ${cocina}.`
-                } else {
-                    respuesta = `La luz del ${cocina} ya está apagada.`
-                }
-            } else if (resultado.includes(lavado)) {
-                if (ubicacionesLuz[lavado] === true) {
-                    ubicacionesLuz[lavado] = false;
-                    respuesta = `Apagando luz ${lavado}.`
-                } else {
-                    respuesta = `La luz del ${lavado} ya está apagada.`
-                }
-            } else if (resultado.includes(salaComedor)) {
-                if (ubicacionesLuz[salaComedor] === true) {
-                    ubicacionesLuz[salaComedor] = false;
-                    respuesta = `Apagando luz ${salaComedor}.`
-                } else {
-                    respuesta = `La luz del ${salaComedor} ya está apagada.`
-                }
-            } else if (resultado.includes('luces') && !manejoLuces) {
-                respuesta = 'Estan desactivadas las luces';
+        } else {
+            respuesta = 'Estan desactivadas las Luces';
+        }
+    }
+    if (resultado.includes('apagar todas las Luces')) {
+        for (let habitacion in ubicacionesLuz) {
+            if (ubicacionesLuz[habitacion] === true) {
+                ubicacionesLuz[habitacion] = false;
+                respuesta += `Apagando Luz ${habitacion}. `;
             }
         }
     }
     texto_resultado.textContent = respuesta;
     convertirTextoAVoz(respuesta);
+
+
+    // if (resultado.includes('puerta') && !manejoPuertas) {
+    //     respuesta = 'Estan desactivadas las puertas';
+    // } else if (resultado.includes('puerta') && manejoPuertas) {
+    //     if (resultado.includes(habitacion1)) {
+    //         if (ubicacionesPuerta[habitacion1] === false) {
+    //             ubicacionesPuerta[habitacion1] = true;
+    //             respuesta = `Abriendo puerta ${habitacion1}.`
+    //         } else {
+    //             ubicacionesPuerta[habitacion1] = false;
+    //             respuesta = `Cerrando puerta ${habitacion1}.`
+    //         }
+    //     } else if (resultado.includes(habitacion2)) {
+    //         if (ubicacionesPuerta[habitacion2] === false) {
+    //             ubicacionesPuerta[habitacion2] = true;
+    //             respuesta = `Abriendo puerta ${habitacion2}.`
+    //         } else {
+    //             ubicacionesPuerta[habitacion2] = false;
+    //             respuesta = `Cerrando puerta ${habitacion2}.`
+    //         }
+    //     } else if (resultado.includes(habitacion3)) {
+    //         if (ubicacionesPuerta[habitacion3] === false) {
+    //             ubicacionesPuerta[habitacion3] = true;
+    //             respuesta = `Abriendo puerta ${habitacion3}.`
+    //         } else {
+    //             ubicacionesPuerta[habitacion3] = false;
+    //             respuesta = `Cerrando puerta ${habitacion3}.`
+    //         }
+    //     } else if (resultado.includes(bañoSocial)) {
+    //         if (ubicacionesPuerta[bañoSocial] === false) {
+    //             ubicacionesPuerta[bañoSocial] = true;
+    //             respuesta = `Abriendo puerta ${bañoSocial}.`
+    //         } else {
+    //             ubicacionesPuerta[bañoSocial] = false;
+    //             respuesta = `Cerrando puerta ${bañoSocial}.`
+    //         }
+    //     } else if (resultado.includes(bañoPrivado)) {
+    //         if (ubicacionesPuerta[bañoPrivado] === false) {
+    //             ubicacionesPuerta[bañoPrivado] = true;
+    //             respuesta = `Abriendo puerta ${bañoPrivado}.`
+    //         } else {
+    //             ubicacionesPuerta[bañoPrivado] = false;
+    //             respuesta = `Cerrando puerta ${bañoPrivado}.`
+    //         }
+    //     }
+    // }
+
+
+
+    // if (resultado.includes('abrir')) {
+    //     if (resultado.includes('puerta') && manejoPuertas) {
+    //         if (resultado.includes(habitacion1)) {
+    //             if (ubicacionesPuerta[habitacion1] === false) {
+    //                 ubicacionesPuerta[habitacion1] = true;
+    //                 respuesta = `Abriendo puerta ${habitacion1}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La puerta del ${habitacion1} ya está abierta.`
+    //             }
+    //         } else if (resultado.includes(habitacion2)) {
+    //             if (ubicacionesPuerta[habitacion2] === false) {
+    //                 ubicacionesPuerta[habitacion2] = true;
+    //                 respuesta = `Abriendo puerta ${habitacion2}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La puerta del ${habitacion2} ya está abierta.`
+    //             }
+
+    //         } else if (resultado.includes(habitacion3)) {
+    //             if (ubicacionesPuerta[habitacion3] === false) {
+    //                 ubicacionesPuerta[habitacion3] = true;
+    //                 respuesta = `Abriendo puerta ${habitacion3}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La puerta del ${habitacion3} ya está abierta.`
+    //             }
+    //         }
+
+    //         else if (resultado.includes(bañoSocial)) {
+    //             if (ubicacionesPuerta[bañoSocial] === false) {
+    //                 ubicacionesPuerta[bañoSocial] = true;
+    //                 respuesta = `Abriendo puerta ${bañoSocial}.`
+    //             } else {
+    //                 respuesta = `La puerta del ${bañoSocial} ya está abierta.`
+    //             }
+    //         }
+    //         else if (resultado.includes(bañoPrivado)) {
+    //             if (ubicacionesPuerta[bañoPrivado] === false) {
+    //                 ubicacionesPuerta[bañoPrivado] = true;
+    //                 respuesta = `Abriendo puerta ${bañoPrivado}.`
+    //             } else {
+    //                 respuesta = `La puerta del ${bañoPrivado} ya está abierta.`
+    //             }
+
+    //             texto_resultado.textContent = respuesta;
+    //             convertirTextoAVoz(respuesta);
+    //         }
+    //     } else if (resultado.includes('puerta') && !manejoPuertas) {
+    //         respuesta = 'Estan desactivadas las puertas';
+    //         texto_resultado.textContent = respuesta;
+    //         convertirTextoAVoz(respuesta);
+
+
+    //     } else if (resultado.includes('ventana') && manejoVentanas) {
+    //         if (resultado.includes(habitacion1)) {
+    //             if (ubicacionesVentana[habitacion1] === false) {
+    //                 ubicacionesVentana[habitacion1] = true;
+    //                 respuesta = `Abriendo ventana ${habitacion1}.`
+
+    //             } else {
+    //                 respuesta = `La ventana del ${habitacion1} ya está abierta.`
+    //             }
+    //         } else if (resultado.includes(habitacion2)) {
+    //             if (ubicacionesVentana[habitacion2] === false) {
+    //                 ubicacionesVentana[habitacion2] = true;
+    //                 respuesta = `Abriendo ventana ${habitacion2}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La ventana del ${habitacion2} ya está abierta.`
+    //             }
+
+    //         } else if (resultado.includes(habitacion3)) {
+    //             if (ubicacionesVentana[habitacion3] === false) {
+    //                 ubicacionesVentana[habitacion3] = true;
+    //                 respuesta = `Abriendo ventana ${habitacion3}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La ventana del ${habitacion3} ya está abierta.`
+    //             }
+    //         }
+
+    //         else if (resultado.includes(bañoSocial)) {
+    //             if (ubicacionesVentana[bañoSocial] === false) {
+    //                 ubicacionesVentana[bañoSocial] = true;
+    //                 respuesta = `Abriendo ventana ${bañoSocial}.`
+    //             } else {
+    //                 respuesta = `La ventana del ${bañoSocial} ya está abierta.`
+    //             }
+    //         }
+    //         else if (resultado.includes(bañoPrivado)) {
+    //             if (ubicacionesVentana[bañoPrivado] === false) {
+    //                 ubicacionesVentana[bañoPrivado] = true;
+    //                 respuesta = `Abriendo ventana ${bañoPrivado}.`
+    //             } else {
+    //                 respuesta = `La ventana del ${bañoPrivado} ya está abierta.`
+    //             }
+    //         } else if (resultado.includes(cocina)) {
+    //             if (ubicacionesVentana[cocina] === false) {
+    //                 ubicacionesVentana[cocina] = true;
+    //                 respuesta = `Abriendo ventana ${cocina}.`
+    //             } else {
+    //                 respuesta = `La ventana del ${cocina} ya está abierta.`
+    //             }
+    //         } else if (resultado.includes(lavado)) {
+    //             if (ubicacionesVentana[lavado] === false) {
+    //                 ubicacionesVentana[lavado] = true;
+    //                 respuesta = `Abriendo ventana ${lavado}.`
+    //             } else {
+    //                 respuesta = `La ventana del ${lavado} ya está abierta.`
+    //             }
+    //         } else if (resultado.includes(salaComedor)) {
+    //             if (ubicacionesVentana[salaComedor] === false) {
+    //                 ubicacionesVentana[salaComedor] = true;
+    //                 respuesta = `Abriendo ventana ${salaComedor}.`
+    //             } else {
+    //                 respuesta = `La ventana del ${salaComedor} ya está abierta.`
+    //             }
+    //         }
+    //         else {
+    //             respuesta = 'No se especifica cual ventana abrir.';
+    //         }
+    //         convertirTextoAVoz(respuesta);
+    //         texto_resultado.textContent = respuesta;
+    //     } else if (resultado.includes('ventana') && !manejoVentanas) {
+    //         respuesta = 'Estan desactivadas las ventanas';
+    //         texto_resultado.textContent = respuesta;
+    //         convertirTextoAVoz(respuesta);
+    //     }
+    // }
+
+
+    // if (resultado.includes('cerrar')) {
+    //     if (resultado.includes('puerta') && manejoPuertas) {
+    //         // primero las tres habitaciones
+    //         if (resultado.includes(habitacion1)) {
+    //             if (ubicacionesPuerta[habitacion1] === true) {
+    //                 ubicacionesPuerta[habitacion1] = false;
+    //                 respuesta = `Cerrando puerta ${habitacion1}.`
+    //             } else {
+    //                 respuesta = `La puerta del ${habitacion1} ya está cerrada.`
+    //             }
+    //         } else if (resultado.includes(habitacion2)) {
+    //             if (ubicacionesPuerta[habitacion2] === true) {
+    //                 ubicacionesPuerta[habitacion2] = false;
+    //                 respuesta = `Cerrando puerta ${habitacion2}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La puerta del ${habitacion2} ya está cerrada.`
+    //             }
+
+    //         } else if (resultado.includes(habitacion3)) {
+    //             if (ubicacionesPuerta[habitacion3] === true) {
+    //                 ubicacionesPuerta[habitacion3] = false;
+    //                 respuesta = `Cerrando puerta ${habitacion3}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La puerta del ${habitacion3} ya está cerrada.`
+    //             }
+    //         }
+
+    //         else if (resultado.includes(bañoSocial)) {
+    //             if (ubicacionesPuerta[bañoSocial] === true) {
+    //                 ubicacionesPuerta[bañoSocial] = false;
+    //                 respuesta = `Cerrando puerta ${bañoSocial}.`
+    //             } else {
+    //                 respuesta = `La puerta del ${bañoSocial} ya está cerrada.`
+    //             }
+    //         }
+    //         else if (resultado.includes(bañoPrivado)) {
+    //             if (ubicacionesPuerta[bañoPrivado] === true) {
+    //                 ubicacionesPuerta[bañoPrivado] = false;
+    //                 respuesta = `Cerrando puerta ${bañoPrivado}.`
+    //             } else {
+    //                 respuesta = `La puerta del ${bañoPrivado} ya está cerrada.`
+    //             }
+
+    //             texto_resultado.textContent = respuesta;
+    //             convertirTextoAVoz(respuesta);
+    //         }
+
+    //     } else if (resultado.includes('puerta') && !manejoPuertas) {
+    //         respuesta = 'Estan desactivadas las puertas';
+    //         texto_resultado.textContent = respuesta;
+    //         convertirTextoAVoz(respuesta);
+    //     }
+    //     else if (resultado.includes('ventana') && manejoVentanas) {
+    //         if (resultado.includes(habitacion1)) {
+    //             if (ubicacionesVentana[habitacion1] === true) {
+    //                 ubicacionesVentana[habitacion1] = false;
+    //                 respuesta = `Cerrando ventana ${habitacion1}.`
+
+    //             } else {
+    //                 respuesta = `La ventana del ${habitacion1} ya está cerrada.`
+    //             }
+    //         } else if (resultado.includes(habitacion2)) {
+    //             if (ubicacionesVentana[habitacion2] === true) {
+    //                 ubicacionesVentana[habitacion2] = false;
+    //                 respuesta = `Cerrando ventana ${habitacion2}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La ventana del ${habitacion2} ya está cerrada.`
+    //             }
+
+    //         } else if (resultado.includes(habitacion3)) {
+    //             if (ubicacionesVentana[habitacion3] === true) {
+    //                 ubicacionesVentana[habitacion3] = false;
+    //                 respuesta = `Cerrando ventana ${habitacion3}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La ventana del ${habitacion3} ya está cerrada.`
+    //             }
+    //         }
+
+    //         else if (resultado.includes(bañoSocial)) {
+    //             if (ubicacionesVentana[bañoSocial] === true) {
+    //                 ubicacionesVentana[bañoSocial] = false;
+    //                 respuesta = `Cerrando ventana ${bañoSocial}.`
+    //             } else {
+    //                 respuesta = `La ventana del ${bañoSocial} ya está cerrada.`
+    //             }
+    //         }
+    //         else if (resultado.includes(bañoPrivado)) {
+    //             if (ubicacionesVentana[bañoPrivado] === true) {
+    //                 ubicacionesVentana[bañoPrivado] = false;
+    //                 respuesta = `Cerrando ventana ${bañoPrivado}.`
+    //             } else {
+    //                 respuesta = `La ventana del ${bañoPrivado} ya está cerrada.`
+    //             }
+    //         } else if (resultado.includes(cocina)) {
+    //             if (ubicacionesVentana[cocina] === true) {
+    //                 ubicacionesVentana[cocina] = false;
+    //                 respuesta = `Cerrando ventana ${cocina}.`
+    //             } else {
+    //                 respuesta = `La ventana del ${cocina} ya está cerrada.`
+    //             }
+    //         } else if (resultado.includes(lavado)) {
+    //             if (ubicacionesVentana[lavado] === true) {
+    //                 ubicacionesVentana[lavado] = false;
+    //                 respuesta = `Cerrando ventana ${lavado}.`
+    //             } else {
+    //                 respuesta = `La ventana del ${lavado} ya está cerrada.`
+    //             }
+    //         } else if (resultado.includes(salaComedor)) {
+    //             if (ubicacionesVentana[salaComedor] === true) {
+    //                 ubicacionesVentana[salaComedor] = false;
+    //                 respuesta = `Cerrando ventana ${salaComedor}.`
+    //             } else {
+    //                 respuesta = `La ventana del ${salaComedor} ya está cerrada.`
+    //             }
+    //         } else {
+    //             respuesta = 'No se especifica cual ventana cerrar';
+    //             convertirTextoAVoz(respuesta);
+    //             texto_resultado.textContent = respuesta;
+    //         }
+
+    //     } else if (resultado.includes('ventana') && !manejoVentanas) {
+    //         respuesta = 'Estan desactivadas las ventanas';
+    //         texto_resultado.textContent = respuesta;
+    //         convertirTextoAVoz(respuesta);
+    //     }
+    // }
+
+    // if ((resultado.includes('encender') || resultado.includes('preder'))) {
+    //     if ((resultado.includes('luces') || resultado.includes('luz')) && manejoLuces) {
+    //         if (resultado.includes(habitacion1)) {
+    //             if (ubicacionesLuz[habitacion1] === false) {
+    //                 ubicacionesLuz[habitacion1] = true;
+    //                 respuesta = `Encendiendo luz ${habitacion1}.`
+
+    //             } else {
+    //                 respuesta = `La luz del ${habitacion1} ya está encendida.`
+    //             }
+    //         } else if (resultado.includes(habitacion2)) {
+    //             if (ubicacionesLuz[habitacion2] === false) {
+    //                 ubicacionesLuz[habitacion2] = true;
+    //                 respuesta = `Encendiendo luz ${habitacion2}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La luz del ${habitacion2} ya está encendida.`
+    //             }
+
+    //         } else if (resultado.includes(habitacion3)) {
+    //             if (ubicacionesLuz[habitacion3] === false) {
+    //                 ubicacionesLuz[habitacion3] = true;
+    //                 respuesta = `Encendiendo luz ${habitacion3}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La luz del ${habitacion3} ya está encendida.`
+    //             }
+    //         }
+
+    //         else if (resultado.includes(bañoSocial)) {
+    //             if (ubicacionesLuz[bañoSocial] === false) {
+    //                 ubicacionesLuz[bañoSocial] = true;
+    //                 respuesta = `Encendiendo luz ${bañoSocial}.`
+    //             } else {
+    //                 respuesta = `La luz del ${bañoSocial} ya está encendida.`
+    //             }
+    //         }
+    //         else if (resultado.includes(bañoPrivado)) {
+    //             if (ubicacionesLuz[bañoPrivado] === false) {
+    //                 ubicacionesLuz[bañoPrivado] = true;
+    //                 respuesta = `Encendiendo luz ${bañoPrivado}.`
+    //             } else {
+    //                 respuesta = `La luz del ${bañoPrivado} ya está encendida.`
+    //             }
+    //         } else if (resultado.includes(cocina)) {
+    //             if (ubicacionesLuz[cocina] === false) {
+    //                 ubicacionesLuz[cocina] = true;
+    //                 respuesta = `Encendiendo luz ${cocina}.`
+    //             } else {
+    //                 respuesta = `La luz del ${cocina} ya está encendida.`
+    //             }
+    //         } else if (resultado.includes(lavado)) {
+    //             if (ubicacionesLuz[lavado] === false) {
+    //                 ubicacionesLuz[lavado] = true;
+    //                 respuesta = `Encendiendo luz ${lavado}.`
+    //             } else {
+    //                 respuesta = `La luz del ${lavado} ya está encendida.`
+    //             }
+    //         } else if (resultado.includes(salaComedor)) {
+    //             if (ubicacionesLuz[salaComedor] === false) {
+    //                 ubicacionesLuz[salaComedor] = true;
+    //                 respuesta = `Encendiendo luz ${salaComedor}.`
+    //             } else {
+    //                 respuesta = `La luz del ${salaComedor} ya está encendida.`
+    //             }
+    //         } else if (resultado.includes('luces') && !manejoLuces) {
+    //             respuesta = 'Estan desactivadas las luces';
+    //         }
+    //     }
+    // }
+
+    // if (resultado.includes('apagar')) {
+    //     if ((resultado.includes('luces') || resultado.includes('luz')) && manejoLuces) {
+    //         if (resultado.includes(habitacion1)) {
+    //             if (ubicacionesLuz[habitacion1] === true) {
+    //                 ubicacionesLuz[habitacion1] = false;
+    //                 respuesta = `Apagando luz ${habitacion1}.`
+
+    //             } else {
+    //                 respuesta = `La luz del ${habitacion1} ya está apagada.`
+    //             }
+    //         } else if (resultado.includes(habitacion2)) {
+    //             if (ubicacionesLuz[habitacion2] === true) {
+    //                 ubicacionesLuz[habitacion2] = false;
+    //                 respuesta = `Apagando luz ${habitacion2}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La luz del ${habitacion2} ya está apagada.`
+    //             }
+
+    //         } else if (resultado.includes(habitacion3)) {
+    //             if (ubicacionesLuz[habitacion3] === true) {
+    //                 ubicacionesLuz[habitacion3] = false;
+    //                 respuesta = `Apagando luz ${habitacion3}.`
+    //                 texto_resultado.textContent = respuesta;
+    //                 convertirTextoAVoz(respuesta);
+    //             } else {
+    //                 respuesta = `La luz del ${habitacion3} ya está apagada.`
+    //             }
+    //         }
+
+    //         else if (resultado.includes(bañoSocial)) {
+    //             if (ubicacionesLuz[bañoSocial] === true) {
+    //                 ubicacionesLuz[bañoSocial] = false;
+    //                 respuesta = `Apagando luz ${bañoSocial}.`
+    //             } else {
+    //                 respuesta = `La luz del ${bañoSocial} ya está apagada.`
+    //             }
+    //         }
+    //         else if (resultado.includes(bañoPrivado)) {
+    //             if (ubicacionesLuz[bañoPrivado] === true) {
+    //                 ubicacionesLuz[bañoPrivado] = false;
+    //                 respuesta = `Apagando luz ${bañoPrivado}.`
+    //             } else {
+    //                 respuesta = `La luz del ${bañoPrivado} ya está apagada.`
+    //             }
+    //         } else if (resultado.includes(cocina)) {
+    //             if (ubicacionesLuz[cocina] === true) {
+    //                 ubicacionesLuz[cocina] = false;
+    //                 respuesta = `Apagando luz ${cocina}.`
+    //             } else {
+    //                 respuesta = `La luz del ${cocina} ya está apagada.`
+    //             }
+    //         } else if (resultado.includes(lavado)) {
+    //             if (ubicacionesLuz[lavado] === true) {
+    //                 ubicacionesLuz[lavado] = false;
+    //                 respuesta = `Apagando luz ${lavado}.`
+    //             } else {
+    //                 respuesta = `La luz del ${lavado} ya está apagada.`
+    //             }
+    //         } else if (resultado.includes(salaComedor)) {
+    //             if (ubicacionesLuz[salaComedor] === true) {
+    //                 ubicacionesLuz[salaComedor] = false;
+    //                 respuesta = `Apagando luz ${salaComedor}.`
+    //             } else {
+    //                 respuesta = `La luz del ${salaComedor} ya está apagada.`
+    //             }
+    //         } else if (resultado.includes('luces') && !manejoLuces) {
+    //             respuesta = 'Estan desactivadas las luces';
+    //         }
+    //     }
+    // }
+    
 }
 
 function extraerNumero(resultado) {
