@@ -27,6 +27,7 @@ function activarReconocimientoDeVoz() {
         // document.querySelector("button").onclick = function () { desactivarReconocimientoDeVoz() };
         if (ultimaLinea != "") {
             procesarResultado(ultimaLinea);
+            enviarDatos(); 
             cambiarPlano();
 
         }
