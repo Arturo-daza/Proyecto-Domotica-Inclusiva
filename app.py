@@ -1,9 +1,27 @@
 from flask import Flask, render_template, request, redirect, url_for
 from controllerBD import *
+from flask_socketio import SocketIO, emit
 app = Flask(__name__)
 application = app
+app.config['SECRET_KEY'] = 'secret_key'
+socketio = SocketIO(app, cors_allowed_origins='*')
+
+@socketio.on('connect')
+def connect():
+    print('Cliente conectado')
 
 
+@socketio.on('disconnect')
+def disconnect():
+    print('Cliente desconectado')
+
+
+@socketio.on('send_message')
+def send_message(data):
+    message = data['data']
+    print('Mensaje recibido:', message)
+    emit('send_message', {'message': message}, broadcast=True)
+    
 @app.route('/')
 def index():
     configuraciones = listaconfiguraciones()
@@ -92,4 +110,5 @@ def lugares():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    # app.run(debug=True, port=8000)
+    socketio.run(app, host='0.0.0.0', port=5000)
