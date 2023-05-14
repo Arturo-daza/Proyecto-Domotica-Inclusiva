@@ -1,9 +1,38 @@
 from flask import Flask, render_template, request, redirect, url_for
 from controllerBD import *
+from flask_socketio import SocketIO, emit
+from funcionArduino import *
 app = Flask(__name__)
 application = app
+app.config['SECRET_KEY'] = 'secret_key'
+socketio = SocketIO(app, cors_allowed_origins='*')
+
+# variables globales
+ubicacionesLuz = {}
+ubicacionesPuerta={}
+ubicacionesVentana={}
 
 
+
+@socketio.on('connect')
+def connect():
+    print('Cliente conectado')
+
+
+@socketio.on('disconnect')
+def disconnect():
+    print('Cliente desconectado')
+
+
+@socketio.on('send_message')
+def send_message(data):
+    global ubicacionesLuz, ubicacionesPuerta, ubicacionesVentana
+    ubicacionesLuz = data['ubicacionesLuz']
+    ubicacionesVentana = data['ubicacionesVentana']
+    ubicacionesPuerta = data['ubicacionesPuerta']
+    enviarArduino(ubicaionesPuerta=ubicacionesPuerta, ubicacionesVentana=ubicacionesVentana, ubicacionesLuz=ubicacionesLuz)
+    emit('send_message', {'message': "Recibido"}, broadcast=True)
+    
 @app.route('/')
 def index():
     configuraciones = listaconfiguraciones()
@@ -92,4 +121,5 @@ def lugares():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    # app.run(debug=True, port=8000)
+    socketio.run(app, debug=True, host='0.0.0.0', port=5000)

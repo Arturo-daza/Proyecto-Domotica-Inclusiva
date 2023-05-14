@@ -5,7 +5,7 @@ let manejoPuertas;
 let manejoVentanas;
 let manejoLuces;
 
-let habitacion1='';
+let habitacion1;
 let habitacion2;
 let habitacion3;
 let bañoSocial;

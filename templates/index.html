@@ -3,7 +3,7 @@
 <h1>Apartamento de {{nombreUsuario}}</h1>
 {% if interaccionPuertas==0 and interaccionVentanas ==0 and interaccionLuces==0 %}
 <form action="{{url_for('configuraciones')}}">
-<button class="btn btn-danger" type="submit">Nada esta activo ir a configuraciones</button>
+    <button class="btn btn-danger" type="submit">Nada esta activo ir a configuraciones</button>
 </form>
 <div class="containerapartamento">
     <div class="apartamento">
@@ -41,10 +41,10 @@
             </div>
             <div class="salaComedor ventanaSalaComedor luzSalaComedor">
                 <div class="sala">
-                    <spam class="Text" style="margin-left: 45%;" >Sala</spam>
+                    <spam class="Text" style="margin-left: 45%;">Sala</spam>
                 </div>
                 <div class="comedor">
-                    
+
                 </div>
             </div>
         </div>
@@ -53,11 +53,11 @@
         <div id="buttons">
             <button id="detecionVoice" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
             {% if deteccionObjetos == 0 %}
-                
+
             {% else %}
-            
-                <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
-                
+
+            <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
+
             {% endif %}
         </div>
         <div id="resulst">
@@ -128,11 +128,11 @@
         <div id="buttons">
             <button id="detecionVoice" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
             {% if deteccionObjetos == 0 %}
-                
+
             {% else %}
-            
-                <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
-                
+
+            <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
+
             {% endif %}
         </div>
         <div id="resulst">
@@ -183,11 +183,11 @@
             </div>
             <div class="salaComedor ventanaSalaComedor luzSalaComedor">
                 <div class="sala">
-                    <spam class="Text" style="margin-left: 45%;" >Sala</spam>
+                    <spam class="Text" style="margin-left: 45%;">Sala</spam>
                     <div class="ventanaInferior ventanaSala"> </div>
                 </div>
                 <div class="comedor">
-                    
+
                     <div class="ventanaInferior ventanaComedor"> </div>
                 </div>
             </div>
@@ -197,11 +197,11 @@
         <div id="buttons">
             <button id="detecionVoice" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
             {% if deteccionObjetos == 0 %}
-                
+
             {% else %}
-            
-                <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
-                
+
+            <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
+
             {% endif %}
         </div>
         <div id="resulst">
@@ -250,10 +250,10 @@
             </div>
             <div class="salaComedor ventanaSalaComedor luzSalaComedor">
                 <div class="sala">
-                    <spam class="Text" style="margin-left: 45%;" >Sala</spam>
+                    <spam class="Text" style="margin-left: 45%;">Sala</spam>
                 </div>
                 <div class="comedor">
-                    
+
                 </div>
             </div>
         </div>
@@ -262,11 +262,11 @@
         <div id="buttons">
             <button id="detecionVoice" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
             {% if deteccionObjetos == 0 %}
-                
+
             {% else %}
-            
-                <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
-                
+
+            <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
+
             {% endif %}
         </div>
         <div id="resulst">
@@ -313,7 +313,7 @@
             </div>
             <div class="salaComedor ventanaSalaComedor luzSalaComedor">
                 <div class="sala">
-                    <spam class="Text" style="margin-left: 45%;" >Sala</spam>
+                    <spam class="Text" style="margin-left: 45%;">Sala</spam>
                 </div>
                 <div class="comedor">
 
@@ -325,11 +325,11 @@
         <div id="buttons">
             <button id="detecionVoice" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
             {% if deteccionObjetos == 0 %}
-                
+
             {% else %}
-            
-                <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
-                
+
+            <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
+
             {% endif %}
         </div>
         <div id="resulst">
@@ -353,12 +353,12 @@
     var bañoPrivadoN = '{{bañoPrivado}}'
     var bañoSocialN = '{{bañoSocial}}'
     var salaComedorN = '{{salaComedor}}'
-    var cocinaN= '{{cocina}}'
-    var lavadoN='{{lavado}}'
-    asignarVariables(interaccionPuertas,interaccionVentanas,interaccionLuces,deteccionObjetos)
+    var cocinaN = '{{cocina}}'
+    var lavadoN = '{{lavado}}'
+    asignarVariables(interaccionPuertas, interaccionVentanas, interaccionLuces, deteccionObjetos)
     asignarLugares(habitacion1N, habitacion2N, habitacion3N, bañoSocialN, bañoPrivadoN, salaComedorN, cocinaN, lavadoN)
 
-    if(interaccionPuertas == '1'){
+    if (interaccionPuertas == '1') {
         //puertas
         document.querySelector(`.puertaHabitacion1`).classList.add(`puerta${capitalizarPrimeraLetra(habitacion1N.replace(/\s+/g, ''))}`)
         document.querySelector(`.puertaHabitacion2`).classList.add(`puerta${capitalizarPrimeraLetra(habitacion2N.replace(/\s+/g, ''))}`)
@@ -367,7 +367,7 @@
         document.querySelector(`.puertaBañoSocial`).classList.add(`puerta${capitalizarPrimeraLetra(bañoSocialN.replace(/\s+/g, ''))}`)
     }
 
-    if(interaccionVentanas == '1'){
+    if (interaccionVentanas == '1') {
         //ventanas
         document.querySelector(`.ventanaHabitacion1`).classList.add(`ventana${capitalizarPrimeraLetra(habitacion1N.replace(/\s+/g, ''))}`)
         document.querySelector(`.ventanaHabitacion2`).classList.add(`ventana${capitalizarPrimeraLetra(habitacion2N.replace(/\s+/g, ''))}`)
@@ -379,7 +379,7 @@
         document.querySelector(`.ventanaLavado`).classList.add(`ventana${capitalizarPrimeraLetra(lavadoN.replace(/\s+/g, ''))}`)
     }
 
-    if(interaccionLuces == '1'){
+    if (interaccionLuces == '1') {
         //luz
         document.querySelector(`.luzHabitacion1`).classList.add(`luz${capitalizarPrimeraLetra(habitacion1N.replace(/\s+/g, ''))}`)
         document.querySelector(`.luzHabitacion2`).classList.add(`luz${capitalizarPrimeraLetra(habitacion2N.replace(/\s+/g, ''))}`)
@@ -392,7 +392,26 @@
 
     }
 
-    
-</script>
-{% endblock %}
+    const socket = io('http://localhost:5000');
 
+    socket.on('connect', () => {
+        console.log('Conectado al servidor');
+    });
+    
+    socket.on('disconnect', () => {
+        console.log('Desconectado del servidor');
+    });
+    
+    function enviarDatos(){
+        socket.emit('send_message', { ubicacionesLuz: ubicacionesLuz, ubicacionesPuerta: ubicacionesPuerta, ubicacionesVentana: ubicacionesVentana });
+    }
+    // Enviar datos al servidor
+    
+    socket.on('send_message', (data) => {
+        const message = data.message;
+        console.log('Mensaje recibido:', message);
+    });
+
+</script>
+
+{% endblock %}
