@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Aplicación de detección de parpadeo</title>
+</head>
+<body>
+    <h1>Aplicación de detección de parpadeo</h1>
+    <p>Esta es una aplicación que utiliza la cámara web para detectar los parpadeos y realizar diferentes acciones, como el control de dispositivos domésticos.</p>
+
+    {% if capturando_video %}
+    <button type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
+    {% else %}
+    <button type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
+    {% endif %}
+    <h1>Video Streaming</h1>
+        <img src="{{ url_for('video_feed') }}" width="640" height="480">
+
+</body>
+</html>
