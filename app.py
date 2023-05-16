@@ -1,9 +1,7 @@
-from flask import Flask, render_template, request, Response, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 from controllerBD import *
 from flask_socketio import SocketIO, emit
 from funcionArduino import *
-from parpadeo import controlador_parpadeo as cp
-
 app = Flask(__name__)
 application = app
 app.config['SECRET_KEY'] = 'secret_key'
@@ -34,41 +32,6 @@ def send_message(data):
     ubicacionesPuerta = data['ubicacionesPuerta']
     enviarArduino(ubicaionesPuerta=ubicacionesPuerta, ubicacionesVentana=ubicacionesVentana, ubicacionesLuz=ubicacionesLuz)
     emit('send_message', {'message': "Recibido"}, broadcast=True)
-    
-    
-capturando_video = False
-
-def toggle_captura_video():
-    global capturando_video
-    if capturando_video:
-        # Detener la captura de video
-        capturando_video = False
-    else:
-        # Iniciar la captura de video
-        capturando_video = True
-
-@app.route('/parpado')
-def parpado():
-    return render_template('parpado.html', capturando_video=capturando_video)
-
-@app.route('/video_feed')
-def video_feed():
-    return Response(cp(capturando_video),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/iniciar_captura')
-def iniciar_captura():
-    toggle_captura_video()
-    # Lógica para iniciar la captura de video
-    return redirect(url_for('parpado'))
-
-@app.route('/detener_captura')
-def detener_captura():
-    toggle_captura_video()
-    # Lógica para detener la captura de video
-    return redirect(url_for('parpado'))
-    
-    
     
 @app.route('/')
 def index():
