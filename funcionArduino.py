@@ -1,16 +1,18 @@
 import serial
 
-#ser = serial.Serial('COM3', 9600,timeout=1)
-#ser.write(b'a')
+ser = serial.Serial('COM5', 9600,timeout=1)
+ser.write(b'a')
 def enviarArduino(ubicaionesPuerta, ubicacionesLuz, ubicacionesVentana):
     print(ubicacionesLuz)
 
 
      
     if ubicacionesLuz['principales']==True:
-            print("PuertaPrincipal LuzEncendida")
+            print("Principal LuzEncendida")
+            ser.write(b'q')
     if ubicacionesLuz['principales']==False:
-            print("PuertaPrincipal LuzApagada")   
+            print("Principal LuzApagada")   
+            ser.write(b'w')
     if ubicacionesLuz['estudio']==True:
             print("estudio LuzEncendida")
     if ubicacionesLuz['estudio']==False:
