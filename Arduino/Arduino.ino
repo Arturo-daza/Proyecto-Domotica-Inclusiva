@@ -37,27 +37,6 @@ void setup() {
 
 void loop() {
   
-  int sensorApuerta1 = analogRead(A1);
-
-  int sensorBpuerta1 = analogRead(A2);
-    if (sensorApuerta1 < 200 && sensorBpuerta1 < 200 ) {
-    Serial.println("Revisar Sensores, Posible mal estado");
-      delay(300);
-  }
-
-  
-  if (sensorApuerta1 < 200 && sensorBpuerta1 >200 ) {
-    Serial.println("Puerta Habitacion 1 Abierta");
-    delay(300);
-  }
-
-
-  if (sensorBpuerta1 < 200 && sensorApuerta1 > 200  ) {
-    Serial.println("Puerta Habitacion 1 Cerrada");
-      delay(300);
-  }
-
- 
 
  
   if (Serial.available() > 0) {
