@@ -96,52 +96,32 @@ void loop() {
       //7
       case 'd':
         digitalWrite(ventanaHab1, HIGH);
-        Serial.println("Baño Social Luz encendida");
+        Serial.println("Ventana 1 abierta");
         break;
       case 'f':
         digitalWrite(ventanaHab1, LOW);
-        Serial.println("Baño Social Luz apagada");
+        Serial.println("Ventana 1 Cerrada");
         break;
       //8
       case 'g':
         digitalWrite(ventanaHab2, HIGH);
-        Serial.println("Baño Social Luz encendida");
+        Serial.println("Ventana 1 abierta");
         break;
       case 'h':
         digitalWrite(ventanaHab2, LOW);
-        Serial.println("Baño Social Luz apagada");
+        Serial.println("Ventana 1 Cerrada");
         break;
       //9
       case 'j':
         digitalWrite(ventanaHab3, HIGH);
-        Serial.println("Baño Social Luz encendida");
+        Serial.println("Ventana 1 abierta");
         break;
       case 'k':
         digitalWrite(ventanaHab3, LOW);
-        Serial.println("Baño Social Luz apagada");
+        Serial.println("Ventana 1 Cerrada");
         break;
       //10
-      case 'l':
-        digitalWrite(ventiladorHab1, HIGH);
-        Serial.println("Baño Social Luz encendida");
-        break;
-
-      case 'z':
-        digitalWrite(ventiladorHab1, LOW);
-        Serial.println("Baño Social Luz apagada");
-        break;
-      case 'x':
-        //11
-        digitalWrite(ventiladorHab2, HIGH);
-        Serial.println("Baño Social Luz encendida");
-        break;
-      case 'c':
-        digitalWrite(ventiladorHab2, LOW);
-        Serial.println("Baño Social Luz apagada");
-        break;
-
-
-
+     
 
 
     }
