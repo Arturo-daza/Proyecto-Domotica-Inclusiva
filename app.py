@@ -11,14 +11,22 @@ app.config['SECRET_KEY'] = 'secret_key'
 # Crea una instancia de cliente de SocketIO como variable global
 sio = socketio.Client()
 
+ubicacionesLuz = {}
+ubicacionesPuerta = {}
+ubicacionesVentana ={}
+
 def conectar_socket():
     # Define los eventos que deseas manejar
     @sio.on('connect')
     def on_connect():
         print('Conectado al servidor SocketIO')
 
-    @sio.on('mensaje')
+    @sio.on('send_message')
     def on_message(data):
+        global ubicacionesLuz, ubicacionesPuerta, ubicacionesVentana
+        ubicacionesLuz = data['ubicacionesLuz']
+        ubicacionesVentana = data['ubicacionesVentana']
+        ubicacionesPuerta = data['ubicacionesPuerta']
         print('Mensaje recibido:', data)
         
     @sio.on('plano')
@@ -52,20 +60,20 @@ def prueba():
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(cp(capturando_video),
+    return Response(cp(capturando_video, ubicacionesPuerta, ubicacionesVentana, ubicacionesLuz),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/iniciar_captura')
 def iniciar_captura():
     toggle_captura_video()
     # Lógica para iniciar la captura de video
-    return redirect(url_for('prueba'))
+    return redirect(url_for('index'))
 
 @app.route('/detener_captura')
 def detener_captura():
     toggle_captura_video()
     # Lógica para detener la captura de video
-    return redirect(url_for('prueba'))
+    return redirect(url_for('index'))
     
 @app.route('/')
 def index():
@@ -86,6 +94,7 @@ def index():
         'salaComedor': lugaresPlano[0]['salaComedor'],
         'lavado': lugaresPlano[0]['lavado'],
         'cocina': lugaresPlano[0]['cocina'],
+        'capturando_video':capturando_video
     }
     return render_template('index.html', **context)
 

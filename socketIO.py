@@ -23,7 +23,7 @@ def send_message(data):
     ubicacionesVentana = data['ubicacionesVentana']
     ubicacionesPuerta = data['ubicacionesPuerta']
     enviarArduino(ubicaionesPuerta=ubicacionesPuerta, ubicacionesVentana=ubicacionesVentana, ubicacionesLuz=ubicacionesLuz)
-    emit('send_message', {'message': "Recibido"}, broadcast=True)
+    emit('send_message', {'message': {'ubicacionesLuz': ubicacionesLuz, 'ubicacionesPuerta': ubicacionesPuerta, 'ubicacionesVentana': ubicacionesVentana}}, broadcast=True)
 
 @socketio.on('plano')
 def send_message(data):

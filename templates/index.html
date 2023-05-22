@@ -127,19 +127,25 @@
     <div id="acciones">
         <div id="buttons">
             <button id="detecionVoice" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
-            {% if deteccionObjetos == 0 %}
-
-            {% else %}
-
+            {% if deteccionObjetos == 1 %}
             <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
-
+            {% endif %}
+            {% if capturando_video %}
+            <button type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
+            {% else %}
+            <button type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
             {% endif %}
         </div>
         <div id="resulst">
             <p id="mostrar"></p>
             <p id="resulado"></p>
         </div>
-        <div id="canvas-container"></div>
+        
+        <div id="canvas-container">
+            {% if capturando_video %}
+            <img src="{{ url_for('video_feed') }}" width="540" height="350">
+            {% endif %}
+        </div>
     </div>
 </div>
 {% elif interaccionPuertas==0 and interaccionVentanas ==1 %}
@@ -196,19 +202,25 @@
     <div id="acciones">
         <div id="buttons">
             <button id="detecionVoice" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
-            {% if deteccionObjetos == 0 %}
-
-            {% else %}
-
+            {% if deteccionObjetos == 1 %}
             <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
-
+            {% endif %}
+            {% if capturando_video %}
+            <button type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
+            {% else %}
+            <button type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
             {% endif %}
         </div>
         <div id="resulst">
             <p id="mostrar"></p>
             <p id="resulado"></p>
         </div>
-        <div id="canvas-container"></div>
+        
+        <div id="canvas-container">
+            {% if capturando_video %}
+            <img src="{{ url_for('video_feed') }}" width="540" height="350">
+            {% endif %}
+        </div>
     </div>
 </div>
 {% elif interaccionPuertas==1 and interaccionVentanas ==0 %}
@@ -412,6 +424,16 @@
         console.log('Mensaje recibido:', message);
     });
 
+    socket.on('plano', (data) => {
+        ubicacionesLuz = data.message.ubicacionesLuz;
+        ubicacionesPuerta = data.message.ubicacionesPuerta;
+        ubicacionesVentana = data.message.ubicacionesVentana;
+        mensaje = data.message.mensaje;
+        convertirTextoAVoz(mensaje)
+        cambiarPlano();
+        console.log('Mensaje recibido:', ubicacionesLuz);
+    });
+    enviarDatos();
 </script>
 
 {% endblock %}
