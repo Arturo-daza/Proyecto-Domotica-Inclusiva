@@ -1,37 +1,71 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, Response
+from parpadeo import controlador_parpadeo as cp
 from controllerBD import *
-from flask_socketio import SocketIO, emit
-from funcionArduino import *
+import threading
+import socketio
 app = Flask(__name__)
 application = app
 app.config['SECRET_KEY'] = 'secret_key'
-socketio = SocketIO(app, cors_allowed_origins='*')
-
-# variables globales
-ubicacionesLuz = {}
-ubicacionesPuerta={}
-ubicacionesVentana={}
 
 
+# Crea una instancia de cliente de SocketIO como variable global
+sio = socketio.Client()
 
-@socketio.on('connect')
-def connect():
-    print('Cliente conectado')
+def conectar_socket():
+    # Define los eventos que deseas manejar
+    @sio.on('connect')
+    def on_connect():
+        print('Conectado al servidor SocketIO')
 
+    @sio.on('mensaje')
+    def on_message(data):
+        print('Mensaje recibido:', data)
+        
+    @sio.on('plano')
+    def on_message(data):
+        print('Mensaje recibido:', data)
 
-@socketio.on('disconnect')
-def disconnect():
-    print('Cliente desconectado')
+    # Establece la conexión al servidor SocketIO
+    sio.connect('http://127.0.0.1:8000')
 
+    # Mantén la conexión activa
+    sio.wait()
+    
 
-@socketio.on('send_message')
-def send_message(data):
-    global ubicacionesLuz, ubicacionesPuerta, ubicacionesVentana
-    ubicacionesLuz = data['ubicacionesLuz']
-    ubicacionesVentana = data['ubicacionesVentana']
-    ubicacionesPuerta = data['ubicacionesPuerta']
-    enviarArduino(ubicaionesPuerta=ubicacionesPuerta, ubicacionesVentana=ubicacionesVentana, ubicacionesLuz=ubicacionesLuz)
-    emit('send_message', {'message': "Recibido"}, broadcast=True)
+    
+    
+
+capturando_video = False
+
+def toggle_captura_video():
+    global capturando_video
+    if capturando_video:
+        # Detener la captura de video
+        capturando_video = False
+    else:
+        # Iniciar la captura de video
+        capturando_video = True
+
+@app.route('/prueba')
+def prueba():
+    return render_template('prueba.html', capturando_video=capturando_video)
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(cp(capturando_video),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/iniciar_captura')
+def iniciar_captura():
+    toggle_captura_video()
+    # Lógica para iniciar la captura de video
+    return redirect(url_for('prueba'))
+
+@app.route('/detener_captura')
+def detener_captura():
+    toggle_captura_video()
+    # Lógica para detener la captura de video
+    return redirect(url_for('prueba'))
     
 @app.route('/')
 def index():
@@ -58,15 +92,6 @@ def index():
 
 @app.route('/configuraciones', methods=['GET', 'POST'])
 def configuraciones():
-    # configuraciones = listaconfiguraciones()
-    # context = {
-    #     'nombreUsuario': configuraciones[0]['nombreUsuario'],
-    #     'interaccionPuertas': configuraciones[0]['interaccionPuertas'],
-    #     'interaccionVentanas': configuraciones[0]['interaccionVentanas'],
-    #     'interaccionLuces': configuraciones[0]['interaccionLuces'],
-    #     'deteccionObjetos': configuraciones[0]['deteccionObjetos']
-    # }
-
     configuraciones = listaconfiguraciones()
     context = {
         'configuraciones': configuraciones
@@ -82,7 +107,6 @@ def configuracionesUpdate():
         interaccionVentanas = int(request.form['interaccionVentanas'])
         interaccionLuces = int(request.form['interaccionLuces'])
         deteccionObjetos = int(request.form['deteccionObjetos'])
-        # deteccionObjetos = int(request.form['check'])
         actualizarConfiguraciones(interaccionPuertas, interaccionVentanas,
                                   interaccionLuces, deteccionObjetos, nombreUsuario)
 
@@ -121,5 +145,9 @@ def lugares():
 
 
 if __name__ == "__main__":
-    # app.run(debug=True, port=8000)
-    socketio.run(app, debug=True, host='0.0.0.0', port=5000)
+    # Inicia la conexión del socket en un hilo separado
+    socket_thread = threading.Thread(target=conectar_socket)
+    socket_thread.start()
+
+    # Ejecuta la aplicación Flask en el hilo principal
+    app.run(debug=True, port=5000)

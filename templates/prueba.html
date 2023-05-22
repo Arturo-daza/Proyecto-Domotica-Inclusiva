@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Aplicación de detección de parpadeo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+
+</head>
+<body>
+    <h1>Aplicación de detección de parpadeo</h1>
+    <p>Esta es una aplicación que utiliza la cámara web para detectar los parpadeos y realizar diferentes acciones, como el control de dispositivos domésticos.</p>
+
+    {% if capturando_video %}
+    <button type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
+    {% else %}
+    <button type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
+    {% endif %}
+    <h1>Video Streaming</h1>
+        <img src="{{ url_for('video_feed') }}" width="640" height="480">
+<script>
+    const socket = io('http://localhost:8000');
+
+    socket.on('connect', () => {
+        console.log('Conectado al servidor');
+    });
+    
+    socket.on('disconnect', () => {
+        console.log('Desconectado del servidor');
+    });
+    
+    function enviarDatos(){
+        socket.emit('send_message', { ubicacionesLuz: ubicacionesLuz, ubicacionesPuerta: ubicacionesPuerta, ubicacionesVentana: ubicacionesVentana });
+    }
+    // Enviar datos al servidor
+    
+    socket.on('plano', (data) => {
+        const message = data.message;
+        console.log('Mensaje recibido:', message);
+    });
+</script>
+</body>
+</html>
