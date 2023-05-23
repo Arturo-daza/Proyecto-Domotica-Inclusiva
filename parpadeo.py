@@ -77,21 +77,21 @@ def controlador_parpadeo(controlador, ubicacionesPuerta, ubicacionesVentana, ubi
                                     tiempo_inicial = time.time()
                                     if lugar == "":
                                         if conteo == 3:
-                                            lugar = lugaresPlano[0]['habitacion1']
+                                            lugar = lugaresPlano[0]['habitacion1'].lower()
                                         elif conteo == 4:
-                                            lugar = lugaresPlano[0]['habitacion2']
+                                            lugar = lugaresPlano[0]['habitacion2'].lower()
                                         elif conteo == 5:
-                                            lugar = lugaresPlano[0]['habitacion3']
+                                            lugar = lugaresPlano[0]['habitacion3'].lower()
                                         elif conteo == 6:
-                                            lugar = lugaresPlano[0]['bañoSocial']
+                                            lugar = lugaresPlano[0]['bañoSocial'].lower()
                                         elif conteo == 7:
-                                            lugar = lugaresPlano[0]['bañoPrivado']
+                                            lugar = lugaresPlano[0]['bañoPrivado'].lower()
                                         elif conteo == 8:
-                                            lugar = lugaresPlano[0]['salaComedor']
+                                            lugar = lugaresPlano[0]['salaComedor'].lower()
                                         elif conteo == 9:
-                                            lugar = lugaresPlano[0]['lavado']
+                                            lugar = lugaresPlano[0]['lavado'].lower()
                                         elif conteo == 10:
-                                            lugar = lugaresPlano[0]['cocina']
+                                            lugar = lugaresPlano[0]['cocina'].lower()
                                         conteo=0
                                     else: 
                                         if conteo == 3:
@@ -124,6 +124,7 @@ def controlador_parpadeo(controlador, ubicacionesPuerta, ubicacionesVentana, ubi
                                             else:
                                                 ubicacionesLuz[lugar] = not ubicacionesLuz[lugar]
                                                 mensaje = "Encendiendo luz " + lugar
+                                        print(ubicacionesLuz)
                                         enviar_mensaje(ubicacionesLuz, ubicacionesPuerta, ubicacionesVentana, mensaje)
                                         conteo = 0
                                         objeto = ""
