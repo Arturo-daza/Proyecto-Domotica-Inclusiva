@@ -22,20 +22,17 @@ def conectar_socket():
         print('Conectado al servidor SocketIO')
 
     @sio.on('send_message')
-    def on_message(data):
+    def send_message(data):
         global ubicacionesLuz, ubicacionesPuerta, ubicacionesVentana
-        ubicacionesLuz = data['ubicacionesLuz']
-        ubicacionesVentana = data['ubicacionesVentana']
-        ubicacionesPuerta = data['ubicacionesPuerta']
-        print('Mensaje recibido:', data)
-        
+        ubicacionesLuz = data['message']['ubicacionesLuz']
+        ubicacionesVentana = data['message']['ubicacionesVentana']
+        ubicacionesPuerta = data['message']['ubicacionesPuerta']        
     @sio.on('plano')
-    def on_message(data):
+    def plano(data):
         print('Mensaje recibido:', data)
 
     # Establece la conexión al servidor SocketIO
     sio.connect('http://127.0.0.1:8000')
-
     # Mantén la conexión activa
     sio.wait()
     

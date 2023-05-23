@@ -22,11 +22,12 @@ def send_message(data):
     ubicacionesLuz = data['ubicacionesLuz']
     ubicacionesVentana = data['ubicacionesVentana']
     ubicacionesPuerta = data['ubicacionesPuerta']
-    enviarArduino(ubicaionesPuerta=ubicacionesPuerta, ubicacionesVentana=ubicacionesVentana, ubicacionesLuz=ubicacionesLuz)
+    # enviarArduino(ubicaionesPuerta=ubicacionesPuerta, ubicacionesVentana=ubicacionesVentana, ubicacionesLuz=ubicacionesLuz)
+    print(ubicacionesLuz)
     emit('send_message', {'message': {'ubicacionesLuz': ubicacionesLuz, 'ubicacionesPuerta': ubicacionesPuerta, 'ubicacionesVentana': ubicacionesVentana}}, broadcast=True)
 
 @socketio.on('plano')
-def send_message(data):
+def plano(data):
     print(data)
     emit('plano', {'message': data['message']}, broadcast=True)
 
