@@ -23,6 +23,7 @@ def conectar_socket():
 
     @sio.on('send_message')
     def send_message(data):
+        print('sadfa:', data)
         global ubicacionesLuz, ubicacionesPuerta, ubicacionesVentana
         ubicacionesLuz = data['message']['ubicacionesLuz']
         ubicacionesVentana = data['message']['ubicacionesVentana']
@@ -38,9 +39,10 @@ def conectar_socket():
     
 
     
-    
-
-capturando_video = False
+capturando_video = False    
+configuraciones = listaconfiguraciones()
+if configuraciones[0]['manejo'] == 'Por parpadeo':
+    capturando_video = True
 
 def toggle_captura_video():
     global capturando_video
@@ -62,7 +64,7 @@ def video_feed():
 
 @app.route('/iniciar_captura')
 def iniciar_captura():
-    toggle_captura_video()
+    toggle_captura_video()  
     # Lógica para iniciar la captura de video
     return redirect(url_for('index'))
 
@@ -78,6 +80,7 @@ def index():
     lugaresPlano = listaLugares()
     context = {
         'nombreUsuario': configuraciones[0]['nombreUsuario'],
+        'manejo': configuraciones[0]['manejo'],
         'interaccionPuertas': configuraciones[0]['interaccionPuertas'],
         'interaccionVentanas': configuraciones[0]['interaccionVentanas'],
         'interaccionLuces': configuraciones[0]['interaccionLuces'],
@@ -109,11 +112,12 @@ def configuraciones():
 def configuracionesUpdate():
     if request.method == 'POST':
         nombreUsuario = request.form['nombreUsuario']
+        manejo = request.form['manejo']
         interaccionPuertas = int(request.form['interaccionPuertas'])
         interaccionVentanas = int(request.form['interaccionVentanas'])
         interaccionLuces = int(request.form['interaccionLuces'])
         deteccionObjetos = int(request.form['deteccionObjetos'])
-        actualizarConfiguraciones(interaccionPuertas, interaccionVentanas,
+        actualizarConfiguraciones(manejo, interaccionPuertas, interaccionVentanas,
                                   interaccionLuces, deteccionObjetos, nombreUsuario)
 
         return redirect(url_for("index"))

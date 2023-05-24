@@ -21,19 +21,20 @@ def listaLugares():
     conexion_MySQLdb.close() #cerrando conexion de la BD    
     return resultadoBusqueda
 
-def actualizarConfiguraciones(interaccionPuertas, interaccionVentanas, interaccionLuces, deteccionObjetos, nombreUsuario):
+def actualizarConfiguraciones(manejo, interaccionPuertas, interaccionVentanas, interaccionLuces, deteccionObjetos, nombreUsuario):
     conexion_MySQLdb = connectionBD()
     cur = conexion_MySQLdb.cursor(dictionary=True)
     cur.execute("""
             UPDATE Configuraciones
             SET
+                manejo = %s, 
                 interaccionPuertas   = %s,
                 interaccionVentanas  = %s,
                 interaccionLuces    = %s,
                 deteccionObjetos   = %s,
                 nombreUsuario = %s
             WHERE id=1
-            """, (interaccionPuertas, interaccionVentanas, interaccionLuces, deteccionObjetos, nombreUsuario))
+            """, (manejo, interaccionPuertas, interaccionVentanas, interaccionLuces, deteccionObjetos, nombreUsuario))
     conexion_MySQLdb.commit()
     cur.close()  # cerrando conexion de la consulta sql
     conexion_MySQLdb.close()  # cerrando conexion de la BD

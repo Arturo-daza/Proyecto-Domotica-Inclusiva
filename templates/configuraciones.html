@@ -20,6 +20,17 @@
                 {% endif %}
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <label for="manejo">Manejo de la aplicación</label>
+                <select id="manejo" name="manejo" class="form-control" required>
+                    <option value="{{ configuraciones[0].manejo }}"> {{ configuraciones[0].manejo }}</option>
+                    {% for data in ['Por voz', 'Por parpadeo'] %}
+                    <option value="{{ data }}"> {{ data }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col">

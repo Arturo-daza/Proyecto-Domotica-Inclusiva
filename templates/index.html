@@ -56,7 +56,7 @@
 
             {% else %}
 
-            <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
+            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
 
             {% endif %}
         </div>
@@ -126,14 +126,17 @@
     </div>
     <div id="acciones">
         <div id="buttons">
+            {% if manejo == 'Por Voz' %}
             <button id="detecionVoice" class="btn btn-primary" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
-            {% if deteccionObjetos == 1 %}
-            <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
-            {% endif %}
-            {% if capturando_video %}
-            <button id="parpadeo" type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
             {% else %}
-            <button type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
+                {% if capturando_video %}
+                <button id="parpadeo" type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
+                {% else %}
+                <button id="parpadeo"  type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
+                {% endif %}
+            {% endif %}
+            {% if deteccionObjetos == 1 %}
+            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
             {% endif %}
         </div>
         <div id="resulst">
@@ -142,7 +145,7 @@
         </div>
         
         <div id="canvas-container">
-            {% if capturando_video %}
+            {% if capturando_video and manejo == 'Por parpadeo' %}
             <img src="{{ url_for('video_feed') }}" width="400" height="400">
             {% endif %}
         </div>
@@ -201,14 +204,17 @@
     </div>
     <div id="acciones">
         <div id="buttons">
-            <button id="detecionVoice" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
-            {% if deteccionObjetos == 1 %}
-            <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
-            {% endif %}
-            {% if capturando_video %}
-            <button type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
+            {% if manejo == 'Por Voz' %}
+            <button id="detecionVoice" class="btn btn-primary" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
             {% else %}
-            <button type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
+                {% if capturando_video %}
+                <button id="parpadeo" type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
+                {% else %}
+                <button id="parpadeo"  type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
+                {% endif %}
+            {% endif %}
+            {% if deteccionObjetos == 1 %}
+            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
             {% endif %}
         </div>
         <div id="resulst">
@@ -217,8 +223,8 @@
         </div>
         
         <div id="canvas-container">
-            {% if capturando_video %}
-            <img src="{{ url_for('video_feed') }}" width="540" height="350">
+            {% if capturando_video and manejo == 'Por parpadeo' %}
+            <img src="{{ url_for('video_feed') }}" width="400" height="400">
             {% endif %}
         </div>
     </div>
@@ -272,20 +278,29 @@
     </div>
     <div id="acciones">
         <div id="buttons">
-            <button id="detecionVoice" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
-            {% if deteccionObjetos == 0 %}
-
+            {% if manejo == 'Por Voz' %}
+            <button id="detecionVoice" class="btn btn-primary" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
             {% else %}
-
-            <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
-
+                {% if capturando_video %}
+                <button id="parpadeo" type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
+                {% else %}
+                <button id="parpadeo"  type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
+                {% endif %}
+            {% endif %}
+            {% if deteccionObjetos == 1 %}
+            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
             {% endif %}
         </div>
         <div id="resulst">
             <p id="mostrar"></p>
             <p id="resulado"></p>
         </div>
-        <div id="canvas-container"></div>
+        
+        <div id="canvas-container">
+            {% if capturando_video and manejo == 'Por parpadeo' %}
+            <img src="{{ url_for('video_feed') }}" width="400" height="400">
+            {% endif %}
+        </div>
     </div>
 </div>
 {% elif interaccionPuertas==0 and interaccionVentanas ==0 %}
@@ -335,17 +350,29 @@
     </div>
     <div id="acciones">
         <div id="buttons">
-            <button id="detecionVoice" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
-            {% if deteccionObjetos == 0 %}
+            {% if manejo == 'Por Voz' %}
+            <button id="detecionVoice" class="btn btn-primary" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
             {% else %}
-            <button id="detectionAction" onclick="activarVideo()">Iniciar deteccion</button>
+                {% if capturando_video %}
+                <button id="parpadeo" type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
+                {% else %}
+                <button id="parpadeo"  type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
+                {% endif %}
+            {% endif %}
+            {% if deteccionObjetos == 1 %}
+            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
             {% endif %}
         </div>
         <div id="resulst">
             <p id="mostrar"></p>
             <p id="resulado"></p>
         </div>
-        <div id="canvas-container"></div>
+        
+        <div id="canvas-container">
+            {% if capturando_video and manejo == 'Por parpadeo' %}
+            <img src="{{ url_for('video_feed') }}" width="400" height="400">
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endif %}
@@ -428,6 +455,7 @@
         mensaje = data.message.mensaje;
         convertirTextoAVoz(mensaje)
         cambiarPlano();
+        enviarDatos();
         console.log('Mensaje recibido:', ubicacionesLuz);
     });
     enviarDatos();

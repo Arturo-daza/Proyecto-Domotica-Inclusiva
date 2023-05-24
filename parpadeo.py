@@ -8,7 +8,7 @@ from controllerBD import listaLugares
 
 def controlador_parpadeo(controlador, ubicacionesPuerta, ubicacionesVentana, ubicacionesLuz):
     lugaresPlano = listaLugares()
-
+    print(ubicacionesPuerta)
     while controlador:
         mp_face_mesh = mp.solutions.face_mesh
         mp_drawing = mp.solutions.drawing_utils
