@@ -126,8 +126,11 @@
     </div>
     <div id="acciones">
         <div id="buttons">
-            {% if manejo == 'Por Voz' %}
+            {% if manejo == 'Por voz' %}
             <button id="detecionVoice" class="btn btn-primary" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
+            {% if deteccionObjetos == 1 %}
+            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
+            {% endif %}
             {% else %}
                 {% if capturando_video %}
                 <button id="parpadeo" type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
@@ -135,9 +138,7 @@
                 <button id="parpadeo"  type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
                 {% endif %}
             {% endif %}
-            {% if deteccionObjetos == 1 %}
-            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
-            {% endif %}
+            
         </div>
         <div id="resulst">
             <p id="mostrar"></p>
@@ -204,8 +205,11 @@
     </div>
     <div id="acciones">
         <div id="buttons">
-            {% if manejo == 'Por Voz' %}
+            {% if manejo == 'Por voz' %}
             <button id="detecionVoice" class="btn btn-primary" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
+            {% if deteccionObjetos == 1 %}
+            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
+            {% endif %}
             {% else %}
                 {% if capturando_video %}
                 <button id="parpadeo" type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
@@ -213,9 +217,7 @@
                 <button id="parpadeo"  type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
                 {% endif %}
             {% endif %}
-            {% if deteccionObjetos == 1 %}
-            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
-            {% endif %}
+            
         </div>
         <div id="resulst">
             <p id="mostrar"></p>
@@ -278,8 +280,11 @@
     </div>
     <div id="acciones">
         <div id="buttons">
-            {% if manejo == 'Por Voz' %}
+            {% if manejo == 'Por voz' %}
             <button id="detecionVoice" class="btn btn-primary" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
+            {% if deteccionObjetos == 1 %}
+            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
+            {% endif %}
             {% else %}
                 {% if capturando_video %}
                 <button id="parpadeo" type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
@@ -287,9 +292,7 @@
                 <button id="parpadeo"  type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
                 {% endif %}
             {% endif %}
-            {% if deteccionObjetos == 1 %}
-            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
-            {% endif %}
+            
         </div>
         <div id="resulst">
             <p id="mostrar"></p>
@@ -350,8 +353,11 @@
     </div>
     <div id="acciones">
         <div id="buttons">
-            {% if manejo == 'Por Voz' %}
+            {% if manejo == 'Por voz' %}
             <button id="detecionVoice" class="btn btn-primary" onclick="activarReconocimientoDeVoz()">Activar micrófono</button>
+            {% if deteccionObjetos == 1 %}
+            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
+            {% endif %}
             {% else %}
                 {% if capturando_video %}
                 <button id="parpadeo" type="button" class="btn btn-danger" onclick="location.href='/detener_captura'">Detener captura</button>
@@ -359,9 +365,7 @@
                 <button id="parpadeo"  type="button" class="btn btn-primary" onclick="location.href='/iniciar_captura'">Iniciar captura</button>
                 {% endif %}
             {% endif %}
-            {% if deteccionObjetos == 1 %}
-            <button id="detectionAction" class="btn btn-warning" onclick="activarVideo()">Iniciar deteccion</button>
-            {% endif %}
+            
         </div>
         <div id="resulst">
             <p id="mostrar"></p>
