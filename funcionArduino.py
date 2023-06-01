@@ -3,13 +3,17 @@ import serial
 import time
 from controllerBD import listaLugares
 
+arduino = None
 
 
 def enviarArduino(ubicaionesPuerta, ubicacionesLuz, ubicacionesVentana):
     lugaresPlano = listaLugares()
-        
-    arduino=serial.Serial('COM3',9600)      
-    time.sleep(2)
+    global arduino
+    if arduino :
+        pass
+    else: 
+        arduino=serial.Serial('COM3',9600)      
+        time.sleep(2)
 #     Luces
     if ubicacionesLuz[lugaresPlano[0]['habitacion1'].lower()]==True:
             print("Principal LuzEncendida")
@@ -39,10 +43,10 @@ def enviarArduino(ubicaionesPuerta, ubicacionesLuz, ubicacionesVentana):
 # PUERTAS
     if ubicaionesPuerta[lugaresPlano[0]['habitacion1'].lower()]==True:
             print("Puerta principales abierta")
-            arduino.write(b'o')
+            arduino.write(b'd')
     elif ubicaionesPuerta[lugaresPlano[0]['habitacion1'].lower()]==False:
             print("Puerta cerrada  Apagada")
-            arduino.write(b'p')
+            arduino.write(b'f')
     if ubicaionesPuerta[lugaresPlano[0]['habitacion2'].lower()]==True:
             print("Puerta estudio abierta")
             arduino.write(b'a')
@@ -51,10 +55,10 @@ def enviarArduino(ubicaionesPuerta, ubicacionesLuz, ubicacionesVentana):
             arduino.write(b's')
     if ubicaionesPuerta[lugaresPlano[0]['bañoSocial'].lower()]==True:
             print("Puerta baño social abierta")
-            arduino.write(b'd')
+            arduino.write(b'o')
     elif ubicaionesPuerta[lugaresPlano[0]['bañoSocial'].lower()]==False:
             print("Puerta baño social cerrada ")
-            arduino.write(b'f')
+            arduino.write(b'p')
 
     ## VENTANAS 
     if ubicacionesVentana[lugaresPlano[0]['habitacion1'].lower()]==True:

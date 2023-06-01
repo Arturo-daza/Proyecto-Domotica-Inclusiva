@@ -3,11 +3,15 @@ import mediapipe as mp
 import math
 import time
 from utils import enviar_mensaje
-from controllerBD import listaLugares
+from controllerBD import listaLugares, listaconfiguraciones
 
 
 def controlador_parpadeo(controlador, ubicacionesPuerta, ubicacionesVentana, ubicacionesLuz):
     lugaresPlano = listaLugares()
+    configuraciones = listaconfiguraciones()
+    interaccionPuertas= int(configuraciones[0]['interaccionPuertas'])
+    interaccionVentanas= int(configuraciones[0]['interaccionVentanas'])
+    interaccionLuces= int(configuraciones[0]['interaccionLuces'])
     print(ubicacionesPuerta)
     while controlador:
         mp_face_mesh = mp.solutions.face_mesh
@@ -94,14 +98,14 @@ def controlador_parpadeo(controlador, ubicacionesPuerta, ubicacionesVentana, ubi
                                             lugar = lugaresPlano[0]['cocina'].lower()
                                         conteo=0
                                     else: 
-                                        if conteo == 3:
+                                        if conteo == 3 and interaccionPuertas==1:
                                             objeto = 'Puerta'
-                                        elif conteo == 4:
+                                        elif conteo == 4 and interaccionVentanas==1:
                                             objeto = 'Ventana'
-                                        elif conteo == 5:
+                                        elif conteo == 5 and interaccionLuces==1:
                                             objeto = 'Luz'
                                         else:
-                                            mensaje = "No se indentifico el mensaje"
+                                            mensaje = "No se indentifico la accion "
                                     
                                         if objeto =="Puerta":
                                             if ubicacionesPuerta[lugar]:
